@@ -48,6 +48,8 @@ from tkinter.scrolledtext import ScrolledText
 # ==========================================================
 import requests
 
+from seed.systemutils.devhud_3x3_layout import build_3x3
+
 
 # ==========================================================
 # LAZY SEED RUNTIME DEPENDENCIES
@@ -1960,7 +1962,12 @@ class DEVHUD(ttk.Frame):
         return frame
 
     def _build_ui(self):
+        """Build the single authoritative DEVHUD 3x3 layout."""
+        build_3x3(self)
+        return
 
+        # ==========================================================
+        # LEGACY UI PATH (retained below for rollback/reference only)
         # ==========================================================
         # LAZY RUNTIME/UI DEPENDENCIES
         # ==========================================================
