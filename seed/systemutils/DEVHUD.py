@@ -1119,8 +1119,123 @@ class DEVHUD(ttk.Frame):
         return completed > 0
 
 
+    def _wire_events(self):
+        """Complete the UI event wiring without creating another runtime."""
+        try:
+            return self._connect_event_bus()
+        except Exception as exc:
+            logger.debug("[DEVHUD] event wiring deferred | %s", exc)
+            return False
+
+    def _log_output(self, message):
+        self._last_seed_output = message
+        try:
+            self.push_message(message)
+        except Exception:
+            pass
+        return message
+
+    def _on_seed_output(self, data=None):
+        return self._log_output(f"[SEED_OUTPUT] {data}")
+
+    def _on_status(self, data=None):
+        return self._log_output(f"[STATUS] {data}")
+
+    def _status_handler(self, data=None):
+        return self._on_status(data)
+
+    def _on_thought(self, data=None):
+        return self._log_output(f"[THOUGHT] {data}")
+
+    def _on_state_update(self, data=None):
+        return self._log_output(f"[STATE] {data}")
+
+    def _on_error(self, data=None):
+        return self._log_output(f"[ERROR] {data}")
+
+    def _render_command_result(self, data=None):
+        self._last_command_result = data
+        return self._log_output(f"[COMMAND_RESULT] {data}")
+
+    def _render_command_denied(self, data=None):
+        self._last_command_denied = data
+        return self._log_output(f"[COMMAND_DENIED] {data}")
+
+    def _handle_seed_command(self, data=None):
+        payload = data if isinstance(data, dict) else {"command": data}
+        command = payload.get("command") or payload.get("name")
+        if command:
+            return self._emit_seed_input(command, "DEVHUD_EVENT")
+        return self._route_seed_input(payload)
+
+    def on_command(self, data=None):
+        return self._handle_seed_command(data)
+
+    def on_qbit_execute(self, data=None):
+        """Observer-only Qbit execution event handler."""
+        return self._log_output(f"[QBIT_EXECUTE] {data}")
+
+    def _on_loop_action(self, event=None):
+        return self._log_output("[LOOP] selected")
+
+    def _on_tree_select(self, event=None):
+        return event
+
+    def _file_selected(self, event=None):
+        try:
+            selection = self.files_listbox.curselection()
+            self._file_selected_path = self.files_listbox.get(selection[0]) if selection else None
+        except Exception:
+            self._file_selected_path = None
+        return self._file_selected_path
+
+    def refresh_files_list(self):
+        try:
+            box = getattr(self, "files_listbox", None)
+            if box is None:
+                return []
+            box.delete(0, "end")
+            root = Path.cwd()
+            entries = []
+            for item in sorted(root.iterdir(), key=lambda p: p.name.lower())[:100]:
+                entries.append(item.name)
+                box.insert("end", item.name)
+            return entries
+        except Exception:
+            return []
+
+    def _build_admin_tab(self, parent):
+        parent.grid_columnconfigure(0, weight=1)
+        ttk.Label(parent, text="SEED Administration — runtime observer").grid(row=0, column=0, sticky="w", padx=8, pady=8)
+
+    def _build_share_tab(self, parent):
+        parent.grid_columnconfigure(0, weight=1)
+        ttk.Label(parent, text="SEED Share — controlled output / mirror").grid(row=0, column=0, sticky="w", padx=8, pady=8)
+
+    def _build_options_tab(self, parent):
+        parent.grid_columnconfigure(0, weight=1)
+        ttk.Label(parent, text="SEED Options — authority remains with QbitDialer").grid(row=0, column=0, sticky="w", padx=8, pady=8)
+
+    def _on_introspect(self, data=None):
+        """Observer-only introspection callback for the DEVHUD."""
+        payload = data if isinstance(data, dict) else {"data": data}
+        snapshot = {
+            "status": getattr(self, "status", "READY"),
+            "qbit": getattr(getattr(self, "qbit", None), "qbit_id", None),
+            "runtime_authority": "QbitDialer",
+            "event_bus": type(getattr(self, "event_bus", None)).__name__ if getattr(self, "event_bus", None) is not None else None,
+            "input_bridge": "SEED_INPUT -> Oracle -> ASK_SEED -> QbitDialer",
+            "payload": payload,
+        }
+        try:
+            self.push_message(f"[INTROSPECT] {snapshot}")
+        except Exception:
+            pass
+        return snapshot
+
+
     def _handle_result(self, data):
- 
+
         self._log_output(
             f"[RESULT] {data}"
         )
@@ -1875,6 +1990,18 @@ class DEVHUD(ttk.Frame):
             self.status_var.set("SEED DEVHUD Ready — runtime attached")
         except Exception:
             pass
+
+        # The full layout is built here rather than relying on the
+        # legacy _build_layout() path. This creates the authoritative
+        # center container before tabs are attached and prevents the
+        # scheduled UI build from falling back to the old loading shell.
+        if not hasattr(self, "hud_center"):
+            self.hud_center = ttk.Frame(self)
+            self.hud_center.grid(row=0, column=1, sticky="nsew")
+            self.hud_center.grid_rowconfigure(0, weight=1)
+            self.hud_center.grid_columnconfigure(0, weight=1)
+            self.grid_rowconfigure(0, weight=1)
+            self.grid_columnconfigure(1, weight=1)
 
         # ==========================================================
         # MENU + TABS

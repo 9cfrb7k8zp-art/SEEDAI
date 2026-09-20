@@ -486,14 +486,23 @@ def claim_primary_runtime(storage_root=None):
             existing_pid = existing.get("pid")
             existing_runtime = existing.get("runtime_id")
             alive = False
+            authoritative_process = False
             if existing_pid:
                 try:
                     import psutil
-                    alive = psutil.pid_exists(int(existing_pid))
+                    process = psutil.Process(int(existing_pid))
+                    alive = process.is_running()
+                    cmdline = " ".join(process.cmdline()).lower()
+                    authoritative_process = "main3.py" in cmdline
                 except Exception:
                     alive = int(existing_pid) == os.getpid()
+                    authoritative_process = alive
 
-            if alive and int(existing_pid) != os.getpid():
+            # PID reuse is possible on Windows. A reused PID is not an
+            # authoritative SEED runtime unless its command line is actually
+            # main3.py. This prevents a stale SEED lease from blocking boot
+            # because an unrelated Python process inherited the old PID.
+            if alive and authoritative_process and int(existing_pid) != os.getpid():
                 boot_warn(
                     "PRIMARY RUNTIME BUSY | "
                     f"runtime_id={existing_runtime} | pid={existing_pid} | "
