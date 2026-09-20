@@ -1,0 +1,207 @@
+# File: fat_hud.html
+# Location: SEED_ROOT/seed/ui/fat_hud.html
+# Purpose: FAT Core, metadata fields, frame indexing,  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SEED FAT HUD</title>
+
+<style>
+    body {
+        margin: 0;
+        background: black;
+        color: #0f0;
+        font-family: monospace;
+        overflow: hidden;
+    }
+
+    #controls {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #111;
+        padding: 4px;
+        z-index: 10;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    canvas {
+        display: block;
+        margin-top: 34px;
+    }
+
+    .src {
+        margin-right: 10px;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+
+<div id="controls">
+    <button id="pauseBtn">⏸ Pause</button>
+    <span id="status">LIVE</span>
+    <div id="sources"></div>
+</div>
+
+<canvas id="hud"></canvas>
+
+<script>
+const canvas = document.getElementById("hud");
+const ctx = canvas.getContext("2d");
+const srcPanel = document.getElementById("sources");
+const pauseBtn = document.getElementById("pauseBtn");
+const statusLbl = document.getElementById("status");
+
+let paused = false;
+
+pauseBtn.onclick = () => {
+    paused = !paused;
+    pauseBtn.textContent = paused ? "▶ Resume" : "⏸ Pause";
+    statusLbl.textContent = paused ? "PAUSED" : "LIVE";
+};
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = 320;
+}
+window.addEventListener("resize", resize);
+resize();
+
+const MAX_SAMPLES = canvas.width;
+
+// ---- STREAM STATE ----
+const streams = {};     // source -> waveform buffer
+const fftBins = {};     // source -> fft
+const meta = {};        // source -> metadata
+const frameIndex = {};  // source -> last frame index
+const gain = {};        // source -> gain
+const muted = {};       // source -> mute flag
+
+const colors = ["#00ff00","#ff0033","#00ffff","#ff00ff","#ffff00"];
+
+const ws = new WebSocket("ws://localhost:8765");
+
+// ---- SOURCE UI ----
+function ensureSourceUI(src) {
+    if (document.getElementById("src-" + src)) return;
+
+    gain[src] = 1.0;
+    muted[src] = false;
+
+    const el = document.createElement("div");
+    el.className = "src";
+    el.id = "src-" + src;
+
+    el.innerHTML = `
+        ${src}
+        <input type="range" min="0" max="3" step="0.1" value="1"
+               onchange="gain['${src}']=this.value">
+        <button onclick="muted['${src}']=!muted['${src}']">
+            🔇
+        </button>
+    `;
+
+    srcPanel.appendChild(el);
+}
+
+// ---- WS INGEST ----
+ws.onmessage = (msg) => {
+    if (paused) return;
+
+    const entry = JSON.parse(msg.data);
+    const src = entry.source || "unknown";
+
+    ensureSourceUI(src);
+
+    if (!streams[src]) {
+        streams[src] = new Float32Array(MAX_SAMPLES);
+        fftBins[src] = [];
+        meta[src] = {};
+        frameIndex[src] = 0;
+    }
+
+    // Metadata / frame index
+    if (entry.frame_index !== undefined) {
+        frameIndex[src] = entry.frame_index;
+    }
+    if (entry.meta) {
+        meta[src] = entry.meta;
+    }
+
+    // Waveform
+    if (entry.data?.waveform) {
+        const wf = entry.data.waveform;
+        const buffer = streams[src];
+
+        buffer.copyWithin(0, wf.length);
+        for (let i = 0; i < wf.length; i++) {
+            buffer[buffer.length - wf.length + i] = wf[i];
+        }
+    }
+
+    // FFT
+    if (entry.data?.fft) {
+        fftBins[src] = entry.data.fft;
+    }
+};
+
+// ---- DRAW LOOP ----
+function draw() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    let idx = 0;
+
+    for (const src in streams) {
+        if (muted[src]) continue;
+
+        const buffer = streams[src];
+        const fft = fftBins[src];
+        const g = gain[src] || 1.0;
+        const color = colors[idx % colors.length];
+
+        // ---- Waveform ----
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+
+        for (let i = 0; i < buffer.length; i++) {
+            const x = i;
+            const y = canvas.height / 2 - buffer[i] * 120 * g;
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        // ---- FFT ----
+        if (fft && fft.length) {
+            const barW = canvas.width / fft.length;
+            ctx.fillStyle = color;
+            for (let i = 0; i < fft.length; i++) {
+                const h = fft[i] * 60 * g;
+                ctx.fillRect(i * barW, canvas.height - 10, barW * 0.8, -h);
+            }
+        }
+
+        // ---- Label ----
+        ctx.fillStyle = color;
+        ctx.fillText(
+            `${src} | frame ${frameIndex[src]}`,
+            10,
+            20 + idx * 14
+        );
+
+        idx++;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

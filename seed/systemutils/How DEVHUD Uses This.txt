@@ -1,0 +1,29 @@
+How DEVHUD Uses This
+Left Panel (Tree)
+tree = devhud_channel_controller.get_channel_tree()
+
+On Click
+devhud_channel_controller.select_channel("SYSTEM/VOICE/OUTPUT")
+
+Right Panel (Details)
+info = devhud_channel_controller.get_selected_channel_info()
+
+Track Tab
+tracks = devhud_channel_controller.get_tracks()
+channels = devhud_channel_controller.get_channels_for_track("QBIT")
+
+# Left Panel (Tree)
+tree = devhud_channel_controller.get_channel_tree()
+
+# On Click
+devhud_channel_controller.select_channel("SYSTEM/VOICE/OUTPUT")
+
+# Right Panel (Details)
+info = devhud_channel_controller.get_selected_channel_info()
+
+# Track Tab
+tracks = devhud_channel_controller.get_tracks()
+channels = devhud_channel_controller.get_channels_for_track("QBIT")
+
+
+

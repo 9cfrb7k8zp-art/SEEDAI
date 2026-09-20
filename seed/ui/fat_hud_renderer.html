@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FAT HUD</title>
+<style>
+  body { margin:0; background:#000; }
+  canvas { display:block; width:100%; height:300px; }
+</style>
+</head>
+<body>
+<canvas id="hud"></canvas>
+<script>
+const canvas = document.getElementById('hud');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = 300;
+
+const streams = {};   // track multiple sources
+const colors = ["#00ff00","#ff0000","#00ffff","#ff00ff","#ffff00","#ffffff"];
+
+const ws = new WebSocket("ws://localhost:8765");
+ws.onmessage = (event) => {
+    const entry = JSON.parse(event.data);
+    if(entry.data?.waveform){
+        streams[entry.source] = {
+            waveform: entry.data.waveform,
+            fft: entry.data.fft
+        };
+    }
+};
+
+function draw() {
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0,0,canvas.width, canvas.height);
+
+    let idx = 0;
+    for(const [source, data] of Object.entries(streams)){
+        const wf = data.waveform;
+        const fft = data.fft;
+
+        ctx.strokeStyle = colors[idx % colors.length];
+        ctx.beginPath();
+        for(let i=0; i<wf.length; i++){
+            const x = (i / wf.length) * canvas.width;
+            const y = canvas.height/2 - (wf[i]*canvas.height/2);
+            if(i==0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+
+        // FFT bar graph at bottom
+        ctx.fillStyle = colors[idx % colors.length];
+        const barWidth = canvas.width / fft.length;
+        for(let i=0; i<fft.length; i++){
+            const h = fft[i]*50;
+            ctx.fillRect(i*barWidth, canvas.height-60, barWidth*0.8, -h);
+        }
+
+        idx++;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

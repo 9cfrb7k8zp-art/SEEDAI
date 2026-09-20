@@ -1,0 +1,3483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<title>SEED AI — Local / Network HUD</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #080b10;
+    color: #d7e3ef;
+    font-family: Consolas, "Courier New", monospace;
+    overflow: hidden;
+}
+
+#app {
+    display: grid;
+    grid-template-rows:
+        42px
+        34px
+        1fr
+        42px;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+#header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 0 14px;
+
+    background: #0d131b;
+    border-bottom: 1px solid #263746;
+}
+
+#brand {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 4px 8px;
+
+    border: 1px solid #263746;
+    background: #101820;
+
+    font-size: 11px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #555;
+}
+
+.online .status-dot {
+    background: #00ff88;
+}
+
+.warning .status-dot {
+    background: #ffaa00;
+}
+
+.failed .status-dot {
+    background: #ff3344;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+#main {
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        185px
+        1fr
+        360px;
+
+    gap: 5px;
+
+    padding: 5px;
+}
+
+/* =========================================================
+   LEFT MENU
+   ========================================================= */
+
+#menu {
+    min-height: 0;
+
+    background: #0c1219;
+    border: 1px solid #263746;
+
+    overflow-y: auto;
+}
+
+.menu-title {
+    padding: 10px;
+
+    color: #00d9ff;
+
+    border-bottom: 1px solid #263746;
+}
+
+.menu-button {
+    width: 100%;
+
+    padding: 9px 10px;
+
+    border: 0;
+    border-bottom: 1px solid #1c2a35;
+
+    background: transparent;
+
+    color: #b9c8d6;
+
+    text-align: left;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background: #16222d;
+    color: #ffffff;
+}
+
+.menu-button.active {
+    background: #122b38;
+    color: #00e5ff;
+}
+
+/* =========================================================
+   CENTER
+   ========================================================= */
+
+#visual {
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-rows:
+        25%
+        25%
+        50%;
+
+    gap: 5px;
+}
+
+.visual-panel {
+    position: relative;
+
+    min-height: 0;
+
+    background: #090e14;
+    border: 1px solid #263746;
+}
+
+.panel-label {
+    position: absolute;
+
+    top: 5px;
+    left: 8px;
+
+    z-index: 5;
+
+    color: #00d9ff;
+
+    font-size: 10px;
+
+    pointer-events: none;
+}
+
+canvas {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================================================
+   RIGHT SYSTEM PANELS
+   ========================================================= */
+
+#systems {
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-rows:
+        1fr
+        1fr;
+
+    gap: 5px;
+}
+
+.panel {
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #0c1219;
+    border: 1px solid #263746;
+}
+
+.panel-header {
+    flex: 0 0 30px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 9px;
+
+    background: #101923;
+
+    border-bottom: 1px solid #263746;
+
+    color: #00d9ff;
+
+    font-size: 11px;
+}
+
+.panel-body {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 8px;
+
+    font-size: 11px;
+}
+
+/* =========================================================
+   OUTPUT
+   ========================================================= */
+
+.output-line {
+    margin-bottom: 5px;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.output-time {
+    color: #64798a;
+}
+
+.output-source {
+    color: #00d9ff;
+}
+
+.output-command {
+    color: #ffaa00;
+}
+
+.output-error {
+    color: #ff4455;
+}
+
+/* =========================================================
+   COMMAND BAR
+   ========================================================= */
+
+#command {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 5px 8px;
+
+    background: #0c1219;
+
+    border: 1px solid #263746;
+}
+
+#prompt {
+    color: #00ff88;
+}
+
+#commandInput {
+    flex: 1;
+
+    height: 30px;
+
+    border: 1px solid #314553;
+
+    background: #070b10;
+
+    color: #ffffff;
+
+    outline: none;
+
+    padding: 0 9px;
+
+    font-family: inherit;
+}
+
+#commandInput:focus {
+    border-color: #00d9ff;
+}
+
+#sendCommand {
+    height: 30px;
+
+    padding: 0 14px;
+
+    border: 1px solid #00aeca;
+    background: #0c2832;
+
+    color: #00e5ff;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+#footer {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 0 10px;
+
+    background: #0d131b;
+
+    border-top: 1px solid #263746;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+}
+
+.metric {
+    color: #8ca2b5;
+}
+
+.metric span {
+    color: #00e5ff;
+}
+
+
+/* =========================================================
+   LOCAL / NETWORK MODE
+   ========================================================= */
+
+#modeBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #0a1017;
+    border-bottom: 1px solid #263746;
+}
+
+.mode-button {
+    border: 1px solid #263746;
+    background: #0d151e;
+    color: #8fa4b6;
+    padding: 6px 10px;
+    font: inherit;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.mode-button.active {
+    color: #00e5ff;
+    border-color: #00aeca;
+    background: #102a34;
+}
+
+#modeDescription {
+    margin-left: auto;
+    color: #64798a;
+    font-size: 10px;
+}
+
+.role-workspace{margin:0 12px 12px;padding:14px;border:1px solid #263746;background:linear-gradient(135deg,#0d171f,#111f29);border-radius:10px}.role-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.role-header strong{font-size:11px;letter-spacing:.12em;color:#c8d5df}.role-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.role-card{padding:12px;border:1px solid #263746;background:#101b24;border-radius:8px;min-height:88px}.role-card b{display:block;color:#d8e4ea;font-size:10px;margin-bottom:6px}.role-card span{display:block;color:#718694;font-size:9px;line-height:1.45}.role-system .role-card{border-color:#31505a}.role-user .role-card{border-color:#4d4934}.role-developer .role-card{border-color:#3c5a48}.role-models .role-card{border-color:#4b4561}.role-owner .role-card{border-color:#5a4c38}@media(max-width:900px){.role-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.role-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
+
+<header id="header">
+
+    <div id="brand">
+        SEED AI
+    </div>
+
+    <div id="kernelStatus" class="status">
+        <span class="status-dot"></span>
+        KERNEL
+    </div>
+
+    <div id="qbitStatus" class="status">
+        <span class="status-dot"></span>
+        QBIT
+    </div>
+
+    <div id="dialerStatus" class="status">
+        <span class="status-dot"></span>
+        DIALER
+    </div>
+
+    <div id="heartbeatStatus" class="status">
+        <span class="status-dot"></span>
+        HEART
+    </div>
+
+    <div id="connectionStatus" class="status">
+        <span class="status-dot"></span>
+        HUD
+    </div>
+
+</header>
+
+<div id="modeBar">
+    <button class="mode-button active" data-mode="offline">LOCAL / OFFLINE</button>
+    <button class="mode-button" data-mode="online">NETWORK / ONLINE</button>
+    <span id="modeDescription">Local SEED runtime · network assist disabled</span>
+</div>
+
+
+<!-- =======================================================
+     MAIN
+     ======================================================= -->
+
+<main id="main">
+
+<!-- =======================================================
+     MENU
+     ======================================================= -->
+
+<section id="menu">
+
+    <div class="menu-title">
+        SEED SYSTEMS
+    </div>
+
+    <button class="menu-button active" data-view="system">
+        SYSTEMS
+    </button>
+
+    <button class="menu-button" data-view="users">
+        USERS
+    </button>
+
+    <button class="menu-button" data-view="developers">
+        DEVELOPERS
+    </button>
+
+    <button class="menu-button" data-view="ai_models">
+        AI MODELS
+    </button>
+
+    <button class="menu-button" data-view="owner">
+        OWNER
+    </button>
+
+    <button class="menu-button"
+            data-view="system">
+        SYSTEM
+    </button>
+
+    <button class="menu-button"
+            data-view="qbit">
+        QBIT
+    </button>
+
+    <button class="menu-button"
+            data-view="dialer">
+        QBIT DIALER
+    </button>
+
+    <button class="menu-button"
+            data-view="heartbeat">
+        HEARTBEAT
+    </button>
+
+    <button class="menu-button"
+            data-view="track">
+        TRACK SYSTEM
+    </button>
+
+    <button class="menu-button"
+            data-view="registry">
+        REGISTRY
+    </button>
+
+    <button class="menu-button"
+            data-view="eventbus">
+        EVENT BUS
+    </button>
+
+    <button class="menu-button"
+            data-view="intent">
+        INTENT ENGINE
+    </button>
+
+    <button class="menu-button"
+            data-view="analytics">
+        ANALYTICS
+    </button>
+
+    <button class="menu-button"
+            data-view="memory">
+        MEMORY
+    </button>
+
+    <button class="menu-button"
+            data-view="cognition">
+        COGNITION
+    </button>
+
+    <button class="menu-button"
+            data-view="lifecycle">
+        LIFECYCLE
+    </button>
+
+    <button class="menu-button"
+            data-view="testing">
+        TESTING
+    </button>
+
+</section>
+
+
+<!-- =======================================================
+     VISUAL FIELD
+     ======================================================= -->
+
+<section id="roleWorkspace" class="role-workspace">
+    <div class="role-header">
+        <span class="panel-label">SEED WORKSPACE</span>
+        <strong id="roleWorkspaceTitle">SYSTEMS</strong>
+    </div>
+    <div id="roleWorkspaceGrid" class="role-grid"></div>
+</section>
+
+<section id="visual">
+
+    <div class="visual-panel">
+
+        <div class="panel-label">
+            SEED SIGNAL / WAVEFORM
+        </div>
+
+        <canvas id="waveform"></canvas>
+
+    </div>
+
+
+    <div class="visual-panel">
+
+        <div class="panel-label">
+            QBIT FREQUENCY / FFT
+        </div>
+
+        <canvas id="fft"></canvas>
+
+    </div>
+
+
+    <div class="visual-panel">
+
+        <div class="panel-label">
+            QBIT / TRACK 3D FIELD
+        </div>
+
+        <canvas id="dotmatrix"></canvas>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     OUTPUT / EVENTBUS
+     ======================================================= -->
+
+<section id="systems">
+
+    <div class="panel">
+
+        <div class="panel-header">
+            SEED OUTPUT
+        </div>
+
+        <div
+            id="seedOutput"
+            class="panel-body">
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <div class="panel-header">
+            EVENT BUS
+        </div>
+
+        <div
+            id="eventOutput"
+            class="panel-body">
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =======================================================
+     COMMAND PLANE
+     ======================================================= -->
+
+<div id="command">
+
+    <span id="prompt">
+        SEED&gt;
+    </span>
+
+    <input
+        id="commandInput"
+        type="text"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Enter SEED command..."
+    >
+
+    <button id="sendCommand">
+        SEND
+    </button>
+
+</div>
+
+
+<!-- =======================================================
+     STATUS FOOTER
+     ======================================================= -->
+
+<footer id="footer">
+
+    <div class="metric">
+        TRACK:
+        <span id="trackValue">---</span>
+    </div>
+
+    <div class="metric">
+        QBIT:
+        <span id="qbitValue">---</span>
+    </div>
+
+    <div class="metric">
+        QUEUE:
+        <span id="queueValue">---</span>
+    </div>
+
+    <div class="metric">
+        MEMORY:
+        <span id="memoryValue">---</span>
+    </div>
+
+    <div class="metric">
+        INTENT:
+        <span id="intentValue">---</span>
+    </div>
+
+    <div class="metric">
+        ANALYTICS:
+        <span id="analyticsValue">---</span>
+    </div>
+
+    <div class="metric">
+        TESTING:
+        <span id="testingValue">---</span>
+    </div>
+
+    <div class="metric">
+        NODES:
+        <span id="testingNodesValue">---</span>
+    </div>
+
+</footer>
+
+</div>
+
+
+<!-- Optional WebGL enhancement. The HUD remains functional without network/CDN access. -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
+
+<script>
+
+/* ==========================================================
+   STATE
+   ========================================================== */
+
+let waveform = [];
+let fft = [];
+let dotMatrix = [];
+let voiceAmplitude = 0;
+
+let currentTrack = "---";
+
+let seedState = {};
+let subsystemState = {};
+
+let ws = null;
+let reconnectTimer = null;
+
+let connectionMode = localStorage.getItem('seed_connection_mode') || 'offline';
+
+let runtimeState = {};
+let registryState = {};
+let registryRuntimeState = {};
+let nodeNetworkState = {};
+let neuralState = {};
+
+let testingState = {
+    status: "UNKNOWN",
+    tests: 0,
+    test_count: 0,
+    regressions: 0,
+    results: 0,
+    nodes: 0,
+    connectedNodes: 0,
+    connected_node_count: 0,
+    requests: 0,
+    events: 0,
+    registry: false,
+    dialer: false,
+    registry_attached: false,
+    dialer_attached: false
+};
+
+let testingEvents = [];
+let uiMode = 'offline';
+
+function setUiMode(mode) {
+    uiMode = mode === 'online' ? 'online' : 'offline';
+    document.querySelectorAll('.mode-button').forEach(button => {
+        button.classList.toggle('active', button.dataset.mode === uiMode);
+    });
+    const description = document.getElementById('modeDescription');
+    if (description) {
+        description.textContent = uiMode === 'online'
+            ? 'Network assist enabled · local execution remains authoritative'
+            : 'Local SEED runtime · network assist disabled';
+    }
+    writeOutput(seedOutput, 'MODE', uiMode === 'online' ? 'NETWORK / ONLINE' : 'LOCAL / OFFLINE');
+    if (uiMode === 'online') {
+        requestRuntimeStatus();
+        requestRegistryStatus();
+        requestNodeNetworkStatus();
+    }
+}
+
+
+document.querySelectorAll('.mode-button').forEach(button => {
+    button.addEventListener('click', () => setUiMode(button.dataset.mode));
+});
+
+
+/* ==========================================================
+   DOM
+   ========================================================== */
+
+const seedOutput =
+    document.getElementById("seedOutput");
+
+const eventOutput =
+    document.getElementById("eventOutput");
+
+const commandInput =
+    document.getElementById("commandInput");
+
+const sendCommand =
+    document.getElementById("sendCommand");
+
+
+/* ==========================================================
+   OUTPUT HELPERS
+   ========================================================== */
+
+function timestamp() {
+
+    return new Date()
+        .toLocaleTimeString();
+
+}
+
+
+function writeOutput(
+    container,
+    source,
+    message,
+    className = ""
+) {
+
+    const line =
+        document.createElement("div");
+
+    line.className =
+        "output-line " + className;
+
+    line.innerHTML =
+        `<span class="output-time">[${timestamp()}]</span> ` +
+        `<span class="output-source">[${escapeHtml(String(source))}]</span> ` +
+        `${escapeHtml(String(message))}`;
+
+    container.appendChild(line);
+
+    while (
+        container.children.length > 300
+    ) {
+
+        container.removeChild(
+            container.firstChild
+        );
+
+    }
+
+    container.scrollTop =
+        container.scrollHeight;
+}
+
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+/* ==========================================================
+   SAFE VALUE HELPERS
+   ========================================================== */
+
+function firstValue(
+    object,
+    names,
+    fallback = undefined
+) {
+
+    if (
+        !object ||
+        typeof object !== "object"
+    ) {
+        return fallback;
+    }
+
+    for (const name of names) {
+
+        if (
+            object[name] !== undefined &&
+            object[name] !== null
+        ) {
+            return object[name];
+        }
+
+    }
+
+    return fallback;
+}
+
+
+function isOnlineState(value) {
+
+    if (value === true)
+        return true;
+
+    if (typeof value !== "string")
+        return false;
+
+    return [
+        "ONLINE",
+        "READY",
+        "ACTIVE",
+        "BOUND",
+        "RUNNING",
+        "AVAILABLE",
+        "DELIVERED"
+    ].includes(
+        value.toUpperCase()
+    );
+}
+
+
+function normalizeStatus(value) {
+
+    if (value === true)
+        return "ONLINE";
+
+    if (value === false)
+        return "OFFLINE";
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "UNKNOWN";
+    }
+
+    if (
+        typeof value === "object"
+    ) {
+
+        return normalizeStatus(
+            firstValue(
+                value,
+                [
+                    "state",
+                    "status",
+                    "lifecycle_state"
+                ],
+                "UNKNOWN"
+            )
+        );
+    }
+
+    return String(value).toUpperCase();
+}
+
+
+/* ==========================================================
+   STATUS
+   ========================================================== */
+
+function setStatus(
+    id,
+    state
+) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element)
+        return;
+
+    element.classList.remove(
+        "online",
+        "warning",
+        "failed"
+    );
+
+    const normalized =
+        normalizeStatus(state);
+
+    if (
+        normalized === "ONLINE" ||
+        normalized === "READY" ||
+        normalized === "ACTIVE" ||
+        normalized === "BOUND" ||
+        normalized === "RUNNING" ||
+        normalized === "AVAILABLE" ||
+        state === true
+    ) {
+
+        element.classList.add(
+            "online"
+        );
+
+    } else if (
+        normalized === "DEGRADED" ||
+        normalized === "PENDING" ||
+        normalized === "LOADING" ||
+        normalized === "WAITING" ||
+        normalized === "INITIALIZING"
+    ) {
+
+        element.classList.add(
+            "warning"
+        );
+
+    } else if (
+        normalized === "FAILED" ||
+        normalized === "ERROR"
+    ) {
+
+        element.classList.add(
+            "failed"
+        );
+    }
+}
+
+
+/* ==========================================================
+   SYSTEM STATUS
+   ========================================================== */
+
+function updateSystemStatus(status) {
+
+    if (
+        !status ||
+        typeof status !== "object"
+    ) {
+        return;
+    }
+
+    seedState = {
+        ...seedState,
+        ...status
+    };
+
+    subsystemState = {
+        ...subsystemState,
+        ...(
+            status.subsystems ||
+            status.systems ||
+            {}
+        )
+    };
+
+    const systems =
+        status.systems ||
+        status.subsystems ||
+        status.authorities ||
+        status;
+
+    const qbit =
+        firstValue(
+            systems,
+            ["qbit", "Qbit", "qbit_core"]
+        );
+
+    const dialer =
+        firstValue(
+            systems,
+            [
+                "qbit_dialer",
+                "dialer",
+                "QbitDialer"
+            ]
+        );
+
+    const kernel =
+        firstValue(
+            systems,
+            [
+                "kernel",
+                "seed_kernel",
+                "SeedKernel"
+            ]
+        );
+
+    const heartbeat =
+        firstValue(
+            systems,
+            [
+                "heartbeat",
+                "heart",
+                "Heartbeat"
+            ]
+        );
+
+    if (qbit !== undefined)
+        setStatus(
+            "qbitStatus",
+            qbit
+        );
+
+    if (dialer !== undefined)
+        setStatus(
+            "dialerStatus",
+            dialer
+        );
+
+    if (kernel !== undefined)
+        setStatus(
+            "kernelStatus",
+            kernel
+        );
+
+    if (heartbeat !== undefined)
+        setStatus(
+            "heartbeatStatus",
+            heartbeat
+        );
+
+    const queue =
+        firstValue(
+            status,
+            [
+                "queue",
+                "queue_depth",
+                "qbit_queue",
+                "qbit_queue_loop",
+                "queue_loop"
+            ],
+            firstValue(
+                systems,
+                [
+                    "queue",
+                    "queue_loop",
+                    "qbit_queue_loop"
+                ],
+                "---"
+            )
+        );
+
+    const memory =
+        firstValue(
+            status,
+            [
+                "memory",
+                "memory_usage",
+                "memory_state"
+            ],
+            "---"
+        );
+
+    const intent =
+        firstValue(
+            status,
+            [
+                "intent",
+                "intent_state",
+                "intent_engine"
+            ],
+            "---"
+        );
+
+    const analytics =
+        firstValue(
+            status,
+            [
+                "analytics",
+                "analytics_state",
+                "analytics_engine"
+            ],
+            "---"
+        );
+
+    document.getElementById(
+        "queueValue"
+    ).textContent =
+        formatMetric(queue);
+
+    document.getElementById(
+        "memoryValue"
+    ).textContent =
+        formatMetric(memory);
+
+    document.getElementById(
+        "intentValue"
+    ).textContent =
+        formatMetric(intent);
+
+    document.getElementById(
+        "analyticsValue"
+    ).textContent =
+        formatMetric(analytics);
+
+    if (
+        status.testing &&
+        typeof status.testing === "object"
+    ) {
+
+        processTestingStatus(
+            status.testing
+        );
+    }
+
+    updateRuntimeSystems(
+        status
+    );
+}
+
+
+function formatMetric(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "---";
+    }
+
+    if (
+        typeof value === "object"
+    ) {
+
+        return normalizeStatus(
+            value
+        );
+    }
+
+    return String(value);
+}
+
+
+/* ==========================================================
+   AUTHORITATIVE RUNTIME / NODE NETWORK
+   ========================================================== */
+
+function updateRuntimeSystems(status) {
+
+    if (
+        !status ||
+        typeof status !== "object"
+    ) {
+        return;
+    }
+
+    runtimeState =
+        firstValue(
+            status,
+            [
+                "runtime",
+                "runtime_state",
+                "runtime_status"
+            ],
+            runtimeState
+        );
+
+    registryState =
+        firstValue(
+            status,
+            [
+                "registry",
+                "sregistry",
+                "system_registry"
+            ],
+            registryState
+        );
+
+    registryRuntimeState =
+        firstValue(
+            status,
+            [
+                "registry_runtime",
+                "registryRuntime",
+                "runtime_registry"
+            ],
+            registryRuntimeState
+        );
+
+    nodeNetworkState =
+        firstValue(
+            status,
+            [
+                "neural_node_network",
+                "neuralNodeNetwork",
+                "node_network",
+                "node_registry",
+                "nodes"
+            ],
+            nodeNetworkState
+        );
+
+    neuralState =
+        firstValue(
+            status,
+            [
+                "neural",
+                "neural_bridge",
+                "neuralBridge"
+            ],
+            neuralState
+        );
+
+    const registry =
+        registryState;
+
+    const registryRuntime =
+        registryRuntimeState;
+
+    const nodes =
+        nodeNetworkState;
+
+    const neural =
+        neuralState;
+
+    const registryOnline =
+        isOnlineState(
+            firstValue(
+                registry,
+                [
+                    "state",
+                    "status",
+                    "boot_state"
+                ]
+            )
+        ) ||
+        firstValue(
+            status,
+            [
+                "registry_attached",
+                "registry"
+            ],
+            false
+        ) === true;
+
+    const neuralOnline =
+        isOnlineState(
+            firstValue(
+                neural,
+                [
+                    "state",
+                    "status"
+                ]
+            )
+        );
+
+    if (registryOnline) {
+
+        testingState.registry =
+            true;
+
+        testingState.registry_attached =
+            true;
+
+    }
+
+    const nodeCount =
+        firstValue(
+            nodes,
+            [
+                "connected_node_count",
+                "connectedNodes",
+                "node_count",
+                "nodes"
+            ],
+            firstValue(
+                status,
+                [
+                    "connected_node_count",
+                    "connectedNodes",
+                    "node_count",
+                    "nodes"
+                ],
+                undefined
+            )
+        );
+
+    if (
+        typeof nodeCount === "number"
+    ) {
+
+        testingState.nodes =
+            nodeCount;
+
+        testingState.connectedNodes =
+            nodeCount;
+
+        testingState.connected_node_count =
+            nodeCount;
+
+        document.getElementById(
+            "testingNodesValue"
+        ).textContent =
+            nodeCount;
+    }
+
+    /*
+     * Registry runtime is the live-provider layer.
+     * Display its state without attempting to manufacture
+     * or replace any runtime object.
+     */
+
+    if (
+        registryRuntime &&
+        typeof registryRuntime === "object"
+    ) {
+
+        const dependencyState =
+            firstValue(
+                registryRuntime,
+                [
+                    "dependencies",
+                    "dependency_state",
+                    "bindings"
+                ]
+            );
+
+        if (dependencyState) {
+
+            testingState.registry =
+                true;
+
+            testingState.registry_attached =
+                true;
+        }
+    }
+
+    /*
+     * NeuralBridge/network state is observational.
+     */
+
+    if (neuralOnline) {
+
+        writeOutput(
+            eventOutput,
+            "NEURAL",
+            "NeuralBridge runtime ONLINE."
+        );
+    }
+}
+
+
+/* ==========================================================
+   TESTING
+   ========================================================== */
+
+function processTestingStatus(status) {
+
+    if (!status || typeof status !== "object")
+        return;
+
+    testingState = {
+        ...testingState,
+        ...status
+    };
+
+    const testCount =
+        status.test_count ??
+        status.tests ??
+        testingState.test_count ??
+        testingState.tests ??
+        "---";
+
+    const nodeCount =
+        status.connected_node_count ??
+        status.connectedNodes ??
+        testingState.connected_node_count ??
+        testingState.connectedNodes ??
+        "---";
+
+    const registryAttached =
+        status.registry_attached ??
+        status.registry ??
+        testingState.registry_attached ??
+        testingState.registry;
+
+    const dialerAttached =
+        status.dialer_attached ??
+        status.dialer ??
+        testingState.dialer_attached ??
+        testingState.dialer;
+
+    document.getElementById(
+        "testingValue"
+    ).textContent =
+        testCount;
+
+    document.getElementById(
+        "testingNodesValue"
+    ).textContent =
+        nodeCount;
+
+    if (
+        status.dialer_attached !== undefined ||
+        status.dialer !== undefined
+    ) {
+
+        setStatus(
+            "dialerStatus",
+            dialerAttached
+        );
+    }
+
+    if (
+        status.registry_attached !== undefined ||
+        status.registry !== undefined
+    ) {
+
+        testingState.registry =
+            registryAttached;
+
+        testingState.registry_attached =
+            registryAttached;
+    }
+
+    writeOutput(
+        eventOutput,
+        "TESTING",
+        JSON.stringify(
+            testingState
+        )
+    );
+}
+
+
+function processTestingEvent(payload) {
+
+    testingEvents.push(payload);
+
+    if (
+        testingEvents.length > 300
+    ) {
+
+        testingEvents.shift();
+    }
+
+    testingState.events =
+        testingEvents.length;
+
+    writeOutput(
+        eventOutput,
+        "TESTING",
+        JSON.stringify(payload)
+    );
+}
+
+
+function processTestResult(payload) {
+
+    if (
+        payload &&
+        payload.test_id
+    ) {
+
+        testingState.results =
+            Number(
+                testingState.results || 0
+            ) + 1;
+    }
+
+    writeOutput(
+        seedOutput,
+        "TESTING",
+        payload?.message ||
+        JSON.stringify(payload)
+    );
+}
+
+
+/* ==========================================================
+   LOCAL / NETWORK MODE
+   ========================================================== */
+
+function applyConnectionMode(mode) {
+    connectionMode = mode === 'online' ? 'online' : 'offline';
+    localStorage.setItem('seed_connection_mode', connectionMode);
+
+    document.querySelectorAll('.mode-button').forEach(button => {
+        button.classList.toggle('active', button.dataset.mode === connectionMode);
+    });
+
+    const description = document.getElementById('modeDescription');
+
+    if (connectionMode === 'offline') {
+        if (reconnectTimer !== null) {
+            clearTimeout(reconnectTimer);
+            reconnectTimer = null;
+        }
+        if (ws) {
+            try { ws.close(); } catch (_) {}
+            ws = null;
+        }
+        description.textContent = 'Local observer mode · no network required';
+        setStatus('connectionStatus', 'OFFLINE');
+        setStatus('kernelStatus', 'LOCAL');
+        setStatus('qbitStatus', 'LOCAL');
+        setStatus('dialerStatus', 'LOCAL');
+        setStatus('heartbeatStatus', 'LOCAL');
+        writeOutput(seedOutput, 'MODE', 'LOCAL / OFFLINE selected. Browser will not open a network socket.');
+        return;
+    }
+
+    description.textContent = 'Network assistive mode · server may provide live runtime state';
+    writeOutput(seedOutput, 'MODE', 'NETWORK / ONLINE selected. Connecting to the local FATHUD endpoint.');
+    connect();
+}
+
+
+document.querySelectorAll('.mode-button').forEach(button => {
+    button.addEventListener('click', () => applyConnectionMode(button.dataset.mode));
+});
+
+
+/* ==========================================================
+   WEBSOCKET
+   ========================================================== */
+
+function connect() {
+
+    if (connectionMode !== 'online') {
+        return;
+    }
+
+    if (
+        ws &&
+        (
+            ws.readyState === WebSocket.OPEN ||
+            ws.readyState === WebSocket.CONNECTING
+        )
+    ) {
+        return;
+    }
+
+    const protocol =
+        window.location.protocol === "https:"
+            ? "wss:"
+            : "ws:";
+
+    ws = new WebSocket(
+        protocol +
+        "//" +
+        (window.location.hostname || "127.0.0.1") +
+        ":8765"
+    );
+
+
+    ws.onopen = () => {
+
+        if (reconnectTimer !== null) {
+
+            clearTimeout(
+                reconnectTimer
+            );
+
+            reconnectTimer = null;
+        }
+
+        setStatus(
+            "connectionStatus",
+            true
+        );
+
+        writeOutput(
+            seedOutput,
+            "HUD",
+            "Connected to FATHUDAdapter."
+        );
+
+        /*
+         * Initial authoritative HUD handshake.
+         */
+
+        send({
+            type: "HUD_HELLO",
+            channel: "HUD",
+            timestamp: Date.now()
+        });
+
+        /*
+         * Request complete current runtime state.
+         *
+         * These are observer requests. They do not
+         * execute commands or bypass QbitDialer.
+         */
+
+        requestSystemStatus();
+
+        requestRuntimeStatus();
+
+        requestRegistryStatus();
+
+        requestNodeNetworkStatus();
+
+        requestTestingStatus();
+
+        requestNetworkTests();
+    };
+
+
+    ws.onclose = () => {
+
+        setStatus(
+            "connectionStatus",
+            false
+        );
+
+        writeOutput(
+            seedOutput,
+            "HUD",
+            "Connection lost. Reconnecting..."
+        );
+
+        scheduleReconnect();
+    };
+
+
+    ws.onerror = () => {
+
+        setStatus(
+            "connectionStatus",
+            "FAILED"
+        );
+    };
+
+
+    ws.onmessage = event => {
+
+        try {
+
+            const data =
+                JSON.parse(
+                    event.data
+                );
+
+            processMessage(data);
+
+        } catch (error) {
+
+            writeOutput(
+                seedOutput,
+                "HUD",
+                "Invalid WebSocket packet.",
+                "output-error"
+            );
+        }
+    };
+}
+
+
+function scheduleReconnect() {
+
+    if (connectionMode !== 'online') {
+        return;
+    }
+
+    if (reconnectTimer !== null)
+        return;
+
+    reconnectTimer =
+        setTimeout(
+            () => {
+
+                reconnectTimer = null;
+
+                connect();
+
+            },
+            2000
+        );
+}
+
+
+function send(packet) {
+
+    if (
+        ws &&
+        ws.readyState === WebSocket.OPEN
+    ) {
+
+        ws.send(
+            JSON.stringify(packet)
+        );
+
+        return true;
+    }
+
+    return false;
+}
+
+
+function requestSystemStatus() {
+
+    send({
+        type: "SYSTEM_STATUS_REQUEST",
+        channel: "HUD",
+        track_id: currentTrack,
+        timestamp: Date.now()
+    });
+}
+
+
+function requestRuntimeStatus() {
+
+    send({
+        type: "RUNTIME_STATUS_REQUEST",
+        channel: "HUD",
+        track_id: currentTrack,
+        timestamp: Date.now()
+    });
+}
+
+
+function requestRegistryStatus() {
+
+    send({
+        type: "REGISTRY_STATUS_REQUEST",
+        channel: "HUD",
+        track_id: currentTrack,
+        timestamp: Date.now()
+    });
+}
+
+
+function requestNodeNetworkStatus() {
+
+    send({
+        type: "NODE_NETWORK_STATUS_REQUEST",
+        channel: "HUD",
+        track_id: currentTrack,
+        timestamp: Date.now()
+    });
+}
+
+
+function requestTestingStatus() {
+
+    send({
+        type: "TESTING_STATUS_REQUEST",
+        channel: "TESTING",
+        track_id: currentTrack,
+        timestamp: Date.now()
+    });
+}
+
+
+function requestNetworkTests() {
+
+    send({
+        type: "TESTING_NETWORK_DISCOVERY",
+        channel: "TESTING",
+        track_id: currentTrack,
+        timestamp: Date.now()
+    });
+}
+
+
+/* ==========================================================
+   PACKET ROUTER
+   ========================================================== */
+
+function processMessage(data) {
+
+    if (
+        !data ||
+        typeof data !== "object"
+    ) {
+        return;
+    }
+
+    const type =
+        String(
+            data.type ||
+            data.message_type ||
+            data.event_type ||
+            "UNKNOWN"
+        ).toUpperCase();
+
+    const payload =
+        data.payload !== undefined
+            ? data.payload
+            : data.data !== undefined
+                ? data.data
+                : data;
+
+
+    switch (type) {
+
+        case "FATHUD_FRAME":
+
+            updateVisualization(
+                payload
+            );
+
+            break;
+
+
+        case "SEED_LIFECYCLE":
+
+        case "LIFECYCLE":
+
+            processLifecycle(
+                payload
+            );
+
+            break;
+
+
+        case "EVENTBUS":
+
+        case "EVENT_BUS":
+
+        case "EVENT":
+
+        case "EVENTBUS_EVENT":
+
+            processEventBusPacket(
+                payload
+            );
+
+            break;
+
+
+        case "TESTING_STATUS":
+
+            processTestingStatus(
+                payload
+            );
+
+            break;
+
+
+        case "TESTING_EVENT":
+
+            processTestingEvent(
+                payload
+            );
+
+            break;
+
+
+        case "TEST_RESULT":
+
+            processTestResult(
+                payload
+            );
+
+            break;
+
+
+        case "SYSTEM_OUTPUT":
+
+        case "SEED_OUTPUT":
+
+        case "SEED_OUTPUT_EVENT":
+
+        case "NEURAL_OUTPUT":
+
+        case "QBIT_OUTPUT":
+
+        case "TRACK_OUTPUT":
+
+        case "ORACLE_OUTPUT":
+
+        case "COGNITION_OUTPUT":
+
+        case "ANALYTICS_OUTPUT":
+
+        case "MEMORY_OUTPUT":
+
+        case "INTENT_OUTPUT":
+
+            processSeedOutputPacket(
+                data,
+                payload,
+                type
+            );
+
+            break;
+
+
+        case "COMMAND_RESULT":
+
+        case "COMMAND_RESPONSE":
+
+        case "DIALER_RESULT":
+
+            writeOutput(
+                seedOutput,
+                "COMMAND",
+                firstValue(
+                    payload,
+                    [
+                        "message",
+                        "result",
+                        "output",
+                        "status"
+                    ],
+                    JSON.stringify(payload)
+                )
+            );
+
+            break;
+
+
+        case "SYSTEM_STATUS":
+
+        case "RUNTIME_STATUS":
+
+        case "RUNTIME_STATE":
+
+            processSystemStatus(
+                payload
+            );
+
+            break;
+
+
+        case "REGISTRY_STATUS":
+
+        case "SREGISTRY_STATUS":
+
+        case "REGISTRY_RUNTIME_STATUS":
+
+            processRegistryStatus(
+                payload,
+                type
+            );
+
+            break;
+
+
+        case "NODE_NETWORK_STATUS":
+
+        case "NODE_STATUS":
+
+        case "NEURAL_NODE_STATUS":
+
+            processNodeNetworkStatus(
+                payload
+            );
+
+            break;
+
+
+        case "QBIT_STATUS":
+
+            processQbitStatus(
+                payload
+            );
+
+            break;
+
+
+        case "QUEUE_STATUS":
+
+        case "QBIT_QUEUE_STATUS":
+
+            processQueueStatus(
+                payload
+            );
+
+            break;
+
+
+        case "TRACK_STATUS":
+
+            processTrackStatus(
+                payload
+            );
+
+            break;
+
+
+        case "HEARTBEAT_STATUS":
+
+        case "HEARTBEAT":
+
+            processHeartbeatStatus(
+                payload
+            );
+
+            break;
+
+
+        default:
+
+            /*
+             * Unknown packets remain visible.
+             *
+             * This is intentional: FATHUD is a runtime
+             * observation surface and must not silently
+             * discard new SEED packet types.
+             */
+
+            processUnknownPacket(
+                data,
+                payload,
+                type
+            );
+
+            break;
+    }
+}
+
+
+/* ==========================================================
+   SEED OUTPUT
+   ========================================================== */
+
+function processSeedOutputPacket(
+    data,
+    payload,
+    type
+) {
+
+    const source =
+        data.source ||
+        firstValue(
+            payload,
+            [
+                "source",
+                "origin",
+                "component",
+                "producer"
+            ],
+            type
+        );
+
+    const message =
+        firstValue(
+            payload,
+            [
+                "message",
+                "output",
+                "text",
+                "result",
+                "content"
+            ],
+            typeof payload === "string"
+                ? payload
+                : JSON.stringify(payload)
+        );
+
+    writeOutput(
+        seedOutput,
+        source,
+        message
+    );
+
+    /*
+     * Capture common SEED runtime data carried alongside
+     * an output packet.
+     */
+
+    if (
+        payload &&
+        typeof payload === "object"
+    ) {
+
+        if (
+            payload.track_id ||
+            payload.trackId
+        ) {
+
+            updateTrack(
+                payload.track_id ||
+                payload.trackId
+            );
+        }
+
+        if (payload.qbit)
+            processQbitStatus(
+                payload.qbit
+            );
+
+        if (payload.queue)
+            processQueueStatus(
+                payload.queue
+            );
+
+        if (payload.system_status)
+            processSystemStatus(
+                payload.system_status
+            );
+
+        if (payload.registry)
+            processRegistryStatus(
+                payload.registry,
+                "REGISTRY_STATUS"
+            );
+    }
+}
+
+
+/* ==========================================================
+   EVENT BUS
+   ========================================================== */
+
+function processEventBusPacket(
+    payload
+) {
+
+    writeOutput(
+        eventOutput,
+        "EVENTBUS",
+        JSON.stringify(payload)
+    );
+
+    if (
+        !payload ||
+        typeof payload !== "object"
+    ) {
+        return;
+    }
+
+    const eventName =
+        firstValue(
+            payload,
+            [
+                "event",
+                "event_type",
+                "type",
+                "name"
+            ]
+        );
+
+    if (
+        eventName &&
+        String(eventName)
+            .toUpperCase()
+            .includes("HEART")
+    ) {
+
+        processHeartbeatStatus(
+            payload
+        );
+    }
+
+    if (
+        payload.lifecycle ||
+        String(eventName || "")
+            .toUpperCase()
+            .includes("LIFECYCLE")
+    ) {
+
+        processLifecycle(
+            payload.lifecycle ||
+            payload
+        );
+    }
+
+    if (
+        payload.qbit ||
+        String(eventName || "")
+            .toUpperCase()
+            .includes("QBIT")
+    ) {
+
+        processQbitStatus(
+            payload.qbit ||
+            payload
+        );
+    }
+}
+
+
+/* ==========================================================
+   REGISTRY
+   ========================================================== */
+
+function processRegistryStatus(
+    payload,
+    type = "REGISTRY_STATUS"
+) {
+
+    if (
+        !payload ||
+        typeof payload !== "object"
+    ) {
+        payload = {
+            value: payload
+        };
+    }
+
+    if (
+        type === "REGISTRY_RUNTIME_STATUS"
+    ) {
+
+        registryRuntimeState =
+            payload;
+
+    } else {
+
+        registryState =
+            payload;
+    }
+
+    const status =
+        normalizeStatus(
+            firstValue(
+                payload,
+                [
+                    "state",
+                    "status",
+                    "boot_state"
+                ],
+                "ONLINE"
+            )
+        );
+
+    testingState.registry =
+        isOnlineState(status) ||
+        payload.attached === true ||
+        payload.registry_attached === true;
+
+    testingState.registry_attached =
+        testingState.registry;
+
+    const nodes =
+        firstValue(
+            payload,
+            [
+                "nodes",
+                "node_count",
+                "connectedNodes",
+                "connected_node_count"
+            ]
+        );
+
+    if (
+        typeof nodes === "number"
+    ) {
+
+        testingState.nodes =
+            nodes;
+
+        testingState.connectedNodes =
+            nodes;
+
+        testingState.connected_node_count =
+            nodes;
+
+        document.getElementById(
+            "testingNodesValue"
+        ).textContent =
+            nodes;
+    }
+
+    writeOutput(
+        eventOutput,
+        type,
+        JSON.stringify(payload)
+    );
+}
+
+
+/* ==========================================================
+   NODE NETWORK
+   ========================================================== */
+
+function processNodeNetworkStatus(
+    payload
+) {
+
+    nodeNetworkState =
+        payload || {};
+
+    const nodeCount =
+        firstValue(
+            payload,
+            [
+                "connected_node_count",
+                "connectedNodes",
+                "node_count",
+                "count"
+            ]
+        );
+
+    if (
+        typeof nodeCount === "number"
+    ) {
+
+        testingState.nodes =
+            nodeCount;
+
+        testingState.connectedNodes =
+            nodeCount;
+
+        testingState.connected_node_count =
+            nodeCount;
+
+        document.getElementById(
+            "testingNodesValue"
+        ).textContent =
+            nodeCount;
+    }
+
+    const state =
+        normalizeStatus(
+            firstValue(
+                payload,
+                [
+                    "state",
+                    "status"
+                ],
+                "ONLINE"
+            )
+        );
+
+    writeOutput(
+        eventOutput,
+        "NODE_NETWORK",
+        `state=${state} | nodes=${nodeCount ?? "---"}`
+    );
+}
+
+
+/* ==========================================================
+   QBIT
+   ========================================================== */
+
+function processQbitStatus(
+    payload
+) {
+
+    const qbit =
+        payload &&
+        typeof payload === "object"
+            ? payload
+            : {
+                id: payload
+            };
+
+    const state =
+        firstValue(
+            qbit,
+            [
+                "state",
+                "status",
+                "lifecycle_state"
+            ],
+            "ONLINE"
+        );
+
+    setStatus(
+        "qbitStatus",
+        state
+    );
+
+    const qbitId =
+        firstValue(
+            qbit,
+            [
+                "qbit_id",
+                "id",
+                "uid",
+                "uuid"
+            ],
+            "---"
+        );
+
+    document.getElementById(
+        "qbitValue"
+    ).textContent =
+        qbitId;
+
+    if (
+        qbit.track_id ||
+        qbit.trackId
+    ) {
+
+        updateTrack(
+            qbit.track_id ||
+            qbit.trackId
+        );
+    }
+
+    writeOutput(
+        eventOutput,
+        "QBIT",
+        JSON.stringify(qbit)
+    );
+}
+
+
+/* ==========================================================
+   QUEUE
+   ========================================================== */
+
+function processQueueStatus(
+    payload
+) {
+
+    let value =
+        payload;
+
+    if (
+        payload &&
+        typeof payload === "object"
+    ) {
+
+        value =
+            firstValue(
+                payload,
+                [
+                    "depth",
+                    "queue_depth",
+                    "size",
+                    "pending",
+                    "length",
+                    "status"
+                ],
+                payload
+            );
+    }
+
+    document.getElementById(
+        "queueValue"
+    ).textContent =
+        formatMetric(value);
+}
+
+
+/* ==========================================================
+   TRACK
+   ========================================================== */
+
+function processTrackStatus(
+    payload
+) {
+
+    const track =
+        firstValue(
+            payload,
+            [
+                "track_id",
+                "trackId",
+                "id"
+            ],
+            typeof payload === "string"
+                ? payload
+                : "---"
+        );
+
+    updateTrack(track);
+
+    writeOutput(
+        eventOutput,
+        "TRACK",
+        JSON.stringify(payload)
+    );
+}
+
+
+function updateTrack(track) {
+
+    if (
+        track === null ||
+        track === undefined ||
+        track === ""
+    ) {
+        return;
+    }
+
+    currentTrack =
+        String(track);
+
+    document.getElementById(
+        "trackValue"
+    ).textContent =
+        currentTrack;
+}
+
+
+/* ==========================================================
+   HEARTBEAT
+   ========================================================== */
+
+function processHeartbeatStatus(
+    payload
+) {
+
+    const state =
+        normalizeStatus(
+            firstValue(
+                payload,
+                [
+                    "state",
+                    "status",
+                    "lifecycle_state"
+                ],
+                "ONLINE"
+            )
+        );
+
+    setStatus(
+        "heartbeatStatus",
+        state
+    );
+
+    const track =
+        firstValue(
+            payload,
+            [
+                "track_id",
+                "trackId"
+            ]
+        );
+
+    if (track)
+        updateTrack(track);
+
+    writeOutput(
+        eventOutput,
+        "HEARTBEAT",
+        JSON.stringify(payload)
+    );
+}
+
+
+/* ==========================================================
+   UNKNOWN PACKETS
+   ========================================================== */
+
+function processUnknownPacket(
+    data,
+    payload,
+    type
+) {
+
+    /*
+     * Try to recognize system packets carried under
+     * alternate packet envelopes before treating them
+     * as completely unknown.
+     */
+
+    if (
+        payload &&
+        typeof payload === "object"
+    ) {
+
+        if (
+            payload.system_status ||
+            payload.runtime_status
+        ) {
+
+            processSystemStatus(
+                payload.system_status ||
+                payload.runtime_status
+            );
+
+            return;
+        }
+
+        if (
+            payload.registry ||
+            payload.registry_runtime
+        ) {
+
+            processRegistryStatus(
+                payload.registry ||
+                payload.registry_runtime,
+                "REGISTRY_STATUS"
+            );
+
+            return;
+        }
+
+        if (
+            payload.nodes ||
+            payload.node_registry ||
+            payload.neural_node_network
+        ) {
+
+            processNodeNetworkStatus(
+                payload.nodes ||
+                payload.node_registry ||
+                payload.neural_node_network
+            );
+
+            return;
+        }
+    }
+
+    writeOutput(
+        seedOutput,
+        data.source || type,
+        JSON.stringify(payload)
+    );
+}
+
+
+/* ==========================================================
+   LIFECYCLE
+   ========================================================== */
+
+function processLifecycle(
+    packet
+) {
+
+    if (
+        !packet ||
+        typeof packet !== "object"
+    ) {
+        return;
+    }
+
+    const component =
+        String(
+            packet.component ||
+            packet.name ||
+            packet.source ||
+            "UNKNOWN"
+        ).toUpperCase();
+
+    const state =
+        packet.state ||
+        packet.status ||
+        "UNKNOWN";
+
+    const track =
+        packet.track_id ||
+        packet.trackId ||
+        "---";
+
+    updateTrack(track);
+
+
+    if (
+        component.includes("QBIT_DIALER") ||
+        component.includes("DIALER")
+    ) {
+
+        setStatus(
+            "dialerStatus",
+            state
+        );
+    }
+
+
+    if (
+        component.includes("QBIT")
+    ) {
+
+        setStatus(
+            "qbitStatus",
+            state
+        );
+    }
+
+
+    if (
+        component.includes("HEART")
+    ) {
+
+        setStatus(
+            "heartbeatStatus",
+            state
+        );
+    }
+
+
+    if (
+        component.includes("KERNEL")
+    ) {
+
+        setStatus(
+            "kernelStatus",
+            state
+        );
+    }
+
+
+    writeOutput(
+        eventOutput,
+        "LIFECYCLE",
+        `${component} -> ${state} | TrackID=${track}`
+    );
+}
+
+
+/* ==========================================================
+   LEGACY / DIRECT SYSTEM STATUS
+   ========================================================== */
+
+function processSystemStatus(
+    status
+) {
+
+    updateSystemStatus(
+        status
+    );
+}
+
+
+/* ==========================================================
+   VISUALIZATION
+   ========================================================== */
+
+function updateVisualization(
+    data
+) {
+
+    if (
+        !data ||
+        typeof data !== "object"
+    ) {
+        return;
+    }
+
+    waveform =
+        data.waveform ||
+        data.wave ||
+        [];
+
+    fft =
+        data.fft ||
+        data.frequency ||
+        [];
+
+    dotMatrix =
+        data.dot_matrix_3d ||
+        data.dotMatrix ||
+        data.nodes_3d ||
+        [];
+
+    voiceAmplitude =
+        data.voice_amplitude ||
+        data.voiceAmplitude ||
+        0;
+
+    if (data.user_info) {
+
+        seedState.user =
+            data.user_info;
+    }
+
+    if (
+        data.track_id ||
+        data.trackId
+    ) {
+
+        updateTrack(
+            data.track_id ||
+            data.trackId
+        );
+    }
+
+    if (data.qbit)
+        processQbitStatus(
+            data.qbit
+        );
+}
+
+
+/* ==========================================================
+   COMMAND PLANE
+   ========================================================== */
+
+function executeCommand() {
+
+    const command =
+        commandInput.value.trim();
+
+    if (!command)
+        return;
+
+
+    writeOutput(
+        seedOutput,
+        "CLI",
+        command,
+        "output-command"
+    );
+
+
+    /*
+     * Browser -> FATHUDAdapter
+     *             -> Qbit input envelope
+     *             -> QbitDialer.submit_command()
+     *
+     * The browser never executes commands locally.
+     */
+
+    const accepted =
+        send({
+
+            type: "SEED_COMMAND",
+
+            channel: "CLI",
+
+            track_id:
+                currentTrack,
+
+            command: command,
+
+            timestamp:
+                Date.now()
+
+        });
+
+
+    if (!accepted) {
+
+        writeOutput(
+            seedOutput,
+            "CLI",
+            "SEED connection unavailable.",
+            "output-error"
+        );
+
+        return;
+    }
+
+    commandInput.value = "";
+
+}
+
+
+sendCommand.onclick =
+    executeCommand;
+
+
+commandInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            executeCommand();
+        }
+    }
+);
+
+
+/* ==========================================================
+   MENU
+   ========================================================== */
+
+const roleWorkspace = document.getElementById("roleWorkspace");
+const roleWorkspaceTitle = document.getElementById("roleWorkspaceTitle");
+const roleWorkspaceGrid = document.getElementById("roleWorkspaceGrid");
+
+const ROLE_VIEWS = {
+    system: {
+        title: "SYSTEMS",
+        cards: [
+            ["Runtime Spine", "Identity → Track → SRegistry → Nodes → Qbit → Cognition → Security → Dialer → QueueLoop → Result → Memory / Telemetry → HUD"],
+            ["Authority", "QbitDialer admits commands; QueueLoop transports/executes; DEVHUD observes and bridges input."],
+            ["Registry", "SRegistry defines structure; registry_runtime reports live provider state; ModuleRegistry maintains module inventory."],
+            ["Nodes", "Node_Registry and Node_Manager bind the discoverable node network without creating replacement authorities."]
+        ]
+    },
+    users: {
+        title: "USERS",
+        cards: [
+            ["Personal Workspace", "Identity, preferences, inputs and permitted history."],
+            ["Local Mode", "Keep interaction and learning on this device; no network transmission."],
+            ["Online Assist", "Synchronize permitted services while local execution remains local."],
+            ["Services", "Account tier, approved tools and user-facing capabilities."]
+        ]
+    },
+    developers: {
+        title: "DEVELOPERS",
+        cards: [
+            ["Runtime", "Boot trace, lifecycle, QueueLoop, Dialer, TrackSystem and SEEDCore."],
+            ["Registry", "SRegistry, registry_runtime, ModuleRegistry and node state."],
+            ["Cognition", "ComputeBrain, TransformerBrain, NeuralBridge and feedback."],
+            ["Security", "Passive guards, signatures, permissions and relay boundaries."]
+        ]
+    },
+    ai_models: {
+        title: "AI MODELS",
+        cards: [
+            ["SEED Cognition", "Qbit → ComputeBrain → ThoughtPacket → TransformerBrain → Intent / Analytics."],
+            ["Local Learning", "Offline observations remain on-device until explicitly synchronized."],
+            ["Network Models", "Online models assist; they do not replace local command authority."],
+            ["Skills", "Discoverable capabilities are cataloged through the skill and integration registries."]
+        ]
+    },
+    owner: {
+        title: "OWNER",
+        cards: [
+            ["Identity", "Owner and system identity boundaries."],
+            ["Infrastructure", "Local node, server configuration and database synchronization."],
+            ["Governance", "Authority boundaries, security state and lifecycle controls."],
+            ["Growth", "Systems, services, security, users, developers and model growth records."]
+        ]
+    }
+};
+
+function renderRoleWorkspace(view) {
+    const config = ROLE_VIEWS[view] || ROLE_VIEWS.system;
+    if (!roleWorkspace || !roleWorkspaceGrid || !roleWorkspaceTitle) return;
+    roleWorkspace.className = `role-workspace role-${view === "ai_models" ? "models" : view}`;
+    roleWorkspaceTitle.textContent = config.title;
+    roleWorkspaceGrid.innerHTML = config.cards.map(([title, body]) => `<article class="role-card"><b>${title}</b><span>${body}</span></article>`).join("");
+}
+
+renderRoleWorkspace("system");
+
+document
+    .querySelectorAll(".menu-button")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(
+                        ".menu-button"
+                    )
+                    .forEach(
+                        item =>
+                            item.classList.remove(
+                                "active"
+                            )
+                    );
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                const view =
+                    button.dataset.view;
+
+                if (ROLE_VIEWS[view]) {
+                    renderRoleWorkspace(view);
+                }
+
+                send({
+
+                    type:
+                        "HUD_VIEW",
+
+                    channel:
+                        "HUD",
+
+                    view:
+                        view,
+
+                    track_id:
+                        currentTrack,
+
+                    timestamp:
+                        Date.now()
+
+                });
+
+
+                writeOutput(
+                    seedOutput,
+                    "HUD",
+                    `View selected: ${view}`
+                );
+
+
+                if (
+                    view === "testing"
+                ) {
+
+                    requestTestingStatus();
+
+                    requestNetworkTests();
+
+                } else if (
+                    view === "registry"
+                ) {
+
+                    requestRegistryStatus();
+
+                } else if (
+                    view === "system"
+                ) {
+
+                    requestSystemStatus();
+
+                    requestRuntimeStatus();
+
+                } else if (
+                    view === "cognition"
+                ) {
+
+                    requestRuntimeStatus();
+
+                } else if (
+                    view === "qbit"
+                ) {
+
+                    requestRuntimeStatus();
+                }
+            }
+        );
+    });
+
+
+/* ==========================================================
+   WAVEFORM
+   ========================================================== */
+
+const waveformCanvas =
+    document.getElementById(
+        "waveform"
+    );
+
+const waveformCtx =
+    waveformCanvas.getContext(
+        "2d"
+    );
+
+
+function drawWaveform() {
+
+    const width =
+        waveformCanvas.width;
+
+    const height =
+        waveformCanvas.height;
+
+
+    waveformCtx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    if (!waveform.length)
+        return;
+
+
+    let peak = 1;
+
+    for (
+        const value of waveform
+    ) {
+
+        peak =
+            Math.max(
+                peak,
+                Math.abs(
+                    Number(value)
+                )
+            );
+    }
+
+
+    waveformCtx.beginPath();
+
+
+    for (
+        let i = 0;
+        i < waveform.length;
+        i++
+    ) {
+
+        const x =
+            i *
+            width /
+            waveform.length;
+
+        const y =
+            height / 2 -
+            (
+                Number(
+                    waveform[i]
+                ) /
+                peak
+            ) *
+            (
+                height * 0.42
+            );
+
+
+        if (i === 0)
+            waveformCtx.moveTo(
+                x,
+                y
+            );
+        else
+            waveformCtx.lineTo(
+                x,
+                y
+            );
+    }
+
+
+    waveformCtx.stroke();
+}
+
+
+/* ==========================================================
+   FFT
+   ========================================================== */
+
+const fftCanvas =
+    document.getElementById(
+        "fft"
+    );
+
+const fftCtx =
+    fftCanvas.getContext(
+        "2d"
+    );
+
+
+function drawFFT() {
+
+    const width =
+        fftCanvas.width;
+
+    const height =
+        fftCanvas.height;
+
+
+    fftCtx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    if (!fft.length)
+        return;
+
+
+    let peak = 1;
+
+    for (
+        const value of fft
+    ) {
+
+        peak =
+            Math.max(
+                peak,
+                Math.abs(
+                    Number(value)
+                )
+            );
+    }
+
+
+    const barWidth =
+        width /
+        fft.length;
+
+
+    for (
+        let i = 0;
+        i < fft.length;
+        i++
+    ) {
+
+        const magnitude =
+            Number(
+                fft[i]
+            ) /
+            peak;
+
+
+        const barHeight =
+            magnitude *
+            height;
+
+
+        fftCtx.fillRect(
+            i * barWidth,
+            height - barHeight,
+            Math.max(
+                1,
+                barWidth - 1
+            ),
+            barHeight
+        );
+    }
+}
+
+
+/* ==========================================================
+   THREE.JS
+   ========================================================== */
+
+const dotCanvas =
+    document.getElementById(
+        "dotmatrix"
+    );
+
+
+let scene = null;
+let camera = null;
+let renderer = null;
+const dots = [];
+const threeAvailable = typeof THREE !== "undefined";
+
+if (threeAvailable) {
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(
+        70,
+        1,
+        0.1,
+        1000
+    );
+
+    camera.position.z = 50;
+
+    renderer = new THREE.WebGLRenderer({
+        canvas: dotCanvas,
+        antialias: true
+    });
+
+} else {
+
+    writeOutput(
+        seedOutput,
+        "HUD",
+        "WebGL library unavailable; using local 2D Qbit field fallback."
+    );
+}
+
+
+function resize() {
+
+    waveformCanvas.width =
+        waveformCanvas.clientWidth;
+
+    waveformCanvas.height =
+        waveformCanvas.clientHeight;
+
+
+    fftCanvas.width =
+        fftCanvas.clientWidth;
+
+    fftCanvas.height =
+        fftCanvas.clientHeight;
+
+
+    const width =
+        dotCanvas.clientWidth;
+
+    const height =
+        dotCanvas.clientHeight;
+
+
+    if (renderer && camera) {
+
+        renderer.setSize(
+            width,
+            height,
+            false
+        );
+
+        camera.aspect =
+            width / Math.max(height, 1);
+
+        camera.updateProjectionMatrix();
+    }
+
+    if (!renderer) {
+        dotCanvas.width = Math.max(1, width);
+        dotCanvas.height = Math.max(1, height);
+    }
+}
+
+
+window.addEventListener(
+    "resize",
+    resize
+);
+
+
+function drawDotMatrix() {
+
+    if (renderer && scene && camera) {
+
+        for (const dot of dots) {
+            scene.remove(dot);
+        }
+
+        dots.length = 0;
+
+        for (const point of dotMatrix) {
+
+            if (!Array.isArray(point)) {
+                continue;
+            }
+
+            const x = Number(point[0]) || 0;
+            const y = Number(point[1]) || 0;
+            const z = Number(point[2]) || 0;
+
+            const geometry = new THREE.SphereGeometry(0.45, 5, 5);
+            const material = new THREE.MeshBasicMaterial();
+            const sphere = new THREE.Mesh(geometry, material);
+
+            sphere.position.set(x, y, z);
+            scene.add(sphere);
+            dots.push(sphere);
+        }
+
+        renderer.render(scene, camera);
+        return;
+    }
+
+    const ctx = dotCanvas.getContext("2d");
+    const width = dotCanvas.width;
+    const height = dotCanvas.height;
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#07100b";
+    ctx.fillRect(0, 0, width, height);
+
+    const scale = Math.min(width, height) / 24;
+    const cx = width / 2;
+    const cy = height / 2;
+
+    for (const point of dotMatrix) {
+
+        if (!Array.isArray(point)) {
+            continue;
+        }
+
+        const x = Number(point[0]) || 0;
+        const y = Number(point[1]) || 0;
+        const z = Number(point[2]) || 0;
+        const depth = Math.max(0.35, 1 - Math.abs(z) / 24);
+        const radius = Math.max(1, 2.5 * depth);
+
+        ctx.beginPath();
+        ctx.arc(cx + x * scale, cy - y * scale, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#55ff9c";
+        ctx.fill();
+    }
+}
+
+
+/* ==========================================================
+   STARTUP
+   ========================================================== */
+
+resize();
+
+animate();
+
+applyConnectionMode(connectionMode);
+
+
+/* ==========================================================
+   ANIMATION
+   ========================================================== */
+
+function animate() {
+
+    requestAnimationFrame(
+        animate
+    );
+
+    drawWaveform();
+
+    drawFFT();
+
+    drawDotMatrix();
+}
+
+</script>
+
+</body>
+</html>

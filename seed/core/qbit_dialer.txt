@@ -1,0 +1,308 @@
+# ==========================================================
+# FILE: qbit_dialer.py
+# PATH: SEED_ROOT/seed/core/qbit_dialer.py
+# MODULE: SEED AI OS — Multi-Qbit Resonance Engine
+# VERSION: Quantum Hybrid v4.0 (Relay-Controlled)
+# UPDATED: 2025-12-30
+# ==========================================================
+
+import asyncio
+import logging
+import threading
+import time
+from datetime import datetime
+from collections import deque, defaultdict
+from uuid import uuid4
+from math import sin, pi
+from typing import Optional, Dict, Any, List, Callable
+
+from seed.core.modem_controller import SEEDModemController
+from seed.core.tracked_data import TrackedData
+
+logger = logging.getLogger("QbitDialer")
+logger.setLevel(logging.INFO)
+
+QBIT_MAX_RETRIES = 3
+QBIT_RETRY_DELAY = 0.05
+RELAY_HEARTBEAT_TIMEOUT = 0.25
+
+
+# ==========================================================
+# RELAY COMMUNICATION SUPERVISOR
+# ==========================================================
+class RelayController:
+    def __init__(self, modem: SEEDModemController):
+        self.modem = modem
+        self.last_heartbeat = time.time()
+        self.relay_online = True
+        self.failure_count = 0
+        self.lock = threading.Lock()
+
+    def heartbeat(self):
+        with self.lock:
+            self.last_heartbeat = time.time()
+            self.relay_online = True
+            self.failure_count = 0
+
+    def push(self, payload: dict) -> bool:
+        with self.lock:
+            if not self._relay_healthy():
+                logger.warning("[Relay] Relay unhealthy — bypassing modem push")
+                return False
+            try:
+                self.modem.push(payload)
+                return True
+            except Exception as e:
+                self.failure_count += 1
+                logger.error(f"[Relay] Modem push failed: {e}")
+                return False
+
+    def _relay_healthy(self) -> bool:
+        if time.time() - self.last_heartbeat > RELAY_HEARTBEAT_TIMEOUT:
+            self.relay_online = False
+        return self.relay_online and self.failure_count < 3
+
+
+# ==========================================================
+# SINGLE QBIT CORE
+# ==========================================================
+class _QbitCore:
+    def __init__(self, name: str, learning_rate: float, bias: float = 1.0):
+        self.name = name
+        self.learning_rate = learning_rate
+        self.bias = bias
+        self.channels = {
+            "seed": 1.0, "user": 1.0, "noise": 0.5,
+            "audio": 0.8, "vision": 0.7, "feedback": 0.4
+        }
+        self.stability = 1.0
+        self.confidence = 0.5
+        self.history = deque(maxlen=64)
+
+    def compute(self, inputs: Dict[str, Any]) -> Dict[str, float]:
+        vector, gate = 0.0, 0.0
+        for k, v in inputs.items():
+            if k == "dominant_intent":
+                continue
+            w = self.channels.get(k, 1.0)
+            vector += v * w
+            gate += sin(v * pi) * w
+
+        intent = inputs.get("dominant_intent", "idle")
+        intent_map = {
+            "observe": (1.2, 0.8),
+            "idle": (0.9, 0.9),
+            "focus": (1.0, 1.3),
+            "explore": (1.1, 1.0),
+            "defensive": (0.8, 1.2)
+        }
+
+        vec_w, gate_w = intent_map.get(intent, (1.0, 1.0))
+        vector = max(min((vector + self.bias) * vec_w * self.stability, 5.0), 0.001)
+        gate = max(min((gate + self.bias) * gate_w * self.stability, 5.0), 0.001)
+
+        self.history.append((vector, gate))
+        return {"vector": vector, "gate": gate}
+
+    def adapt(self):
+        if len(self.history) < 2:
+            return
+        dv = self.history[-1][0] - self.history[-2][0]
+        dg = self.history[-1][1] - self.history[-2][1]
+        delta = (dv + dg) / 2
+        self.stability = max(0.4, min(1.2, 1.0 - abs(delta)))
+        reward = delta * self.stability
+        self.confidence = max(0.0, min(1.0, self.confidence + reward * 0.1))
+        for k in self.channels:
+            self.channels[k] = max(
+                0.1, min(2.0, self.channels[k] + self.learning_rate * reward)
+            )
+
+
+# ==========================================================
+# MULTI-QBIT DIALER (RELAY-CONTROLLED)
+# ==========================================================
+class QbitDialer:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(
+        self,
+        storage_root: str = "./SEED_ROOT",
+        event_bus=None,
+        fat_layer=None,
+        hud_interface=None,
+        seed_core=None,
+        sparkplug_loader=None,
+        actuator_engine=None,
+        agent_manager=None,
+        smoothing_window: int = 5,
+        *args,
+        **kwargs
+    ):
+        if getattr(self, "_initialized", False):
+            return
+        self._initialized = True
+
+        self.event_bus = event_bus
+        self.fat_layer = fat_layer
+        self.hud_interface = hud_interface
+        self.seed_core = seed_core
+        self.sparkplug_loader = sparkplug_loader
+        self.actuator_engine = actuator_engine
+        self.agent_manager = agent_manager
+        self.smoothing_window = smoothing_window
+
+        self._queue: List[Dict[str, Any]] = []
+        self.subscriptions: Dict[str, List[Callable]] = {}
+
+        self.primary = _QbitCore("primary", 0.05)
+        self.shadows = [
+            _QbitCore("shadow_fast", 0.08),
+            _QbitCore("shadow_stable", 0.02),
+            _QbitCore("shadow_noise", 0.04),
+        ]
+
+        self._incoming = defaultdict(deque)
+        self.history = deque(maxlen=256)
+
+        self.modem = SEEDModemController(storage_root, event_bus)
+        self.relay = RelayController(self.modem)
+
+        try:
+            self.loop = asyncio.get_running_loop()
+        except RuntimeError:
+            self.loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self.loop)
+
+        if self.event_bus:
+            self.event_bus.subscribe("HEARTBEAT", self._on_heartbeat, cooldown_sec=0.05)
+            self.event_bus.subscribe("QBIT_TICK", self._on_tick, cooldown_sec=0.05)
+
+        threading.Thread(target=self._qbit_loop, daemon=True).start()
+        logger.info("[QbitDialer] Initialized with Relay Continuity Control")
+
+    # -----------------------------------------------------------
+    # Core Interfaces (DO NOT REMOVE)
+    # -----------------------------------------------------------
+    def push_data(self, data: Dict[str, Any], track_id: Optional[str] = None) -> bool:
+        track_id = track_id or f"QBIT-IN-{uuid4()}"
+        payload = {"data": data}
+        return self.emit_safe(payload, track_id=track_id)
+
+    def emit(
+        self,
+        payload: Dict[str, Any],
+        track_id: Optional[str] = None,
+        results: Optional[Dict[str, Any]] = None,
+    ):
+        track_id = track_id or f"QBIT-{uuid4()}"
+        frame = {
+            "track_id": track_id,
+            "payload": payload,
+            "results": results,
+            "time": datetime.now().isoformat(),
+        }
+        self.history.append(frame)
+
+        self.relay.push(frame)
+
+        if self.event_bus:
+            td = TrackedData(payload=frame, source_id="QbitDialer", channel="QBIT")
+            self.event_bus.publish("QBIT", payload=td)
+
+        for module in (
+            self.fat_layer,
+            self.hud_interface,
+            self.seed_core,
+            self.sparkplug_loader,
+            self.actuator_engine,
+            self.agent_manager,
+        ):
+            if module and hasattr(module, "push_data"):
+                try:
+                    module.push_data(frame)
+                except Exception as e:
+                    logger.warning(f"[QbitDialer] module push_data failed: {e}")
+
+    def emit_safe(
+        self,
+        payload: Dict[str, Any],
+        results: Optional[Dict[str, Any]] = None,
+        track_id: Optional[str] = None,
+    ) -> bool:
+        for _ in range(QBIT_MAX_RETRIES):
+            try:
+                self.emit(payload, track_id=track_id, results=results)
+                return True
+            except Exception as e:
+                logger.warning(f"[QbitDialer] emit retry failed: {e}")
+                time.sleep(QBIT_RETRY_DELAY)
+        logger.error("[QbitDialer] emit permanently failed")
+        return False
+
+    def subscribe(self, event_name: str, callback: Callable):
+        self.subscriptions.setdefault(event_name, []).append(callback)
+
+    def flush(self):
+        self._queue.clear()
+
+    # -----------------------------------------------------------
+    # Event Handlers
+    # -----------------------------------------------------------
+    def _on_heartbeat(self, event):
+        self.relay.heartbeat()
+        payload = getattr(event, "payload", {})
+        self._incoming["heartbeat"].append(payload)
+
+    def _on_tick(self, event):
+        payload = getattr(event, "payload", {})
+        self._incoming["tick"].append(payload)
+
+    # -----------------------------------------------------------
+    # Core Qbit Loop
+    # -----------------------------------------------------------
+    def _aggregate(self) -> Dict[str, Any]:
+        agg = {
+            "seed": 0, "user": 0, "noise": 0,
+            "audio": 0, "vision": 0, "feedback": 0,
+            "dominant_intent": "idle",
+        }
+        count = 0
+        for buf in self._incoming.values():
+            for p in buf:
+                for k in agg:
+                    if k != "dominant_intent":
+                        agg[k] += p.get(k, 0)
+                if "dominant_intent" in p:
+                    agg["dominant_intent"] = p["dominant_intent"]
+                count += 1
+        if count:
+            for k in agg:
+                if k != "dominant_intent":
+                    agg[k] /= count
+        return agg
+
+    def _qbit_loop(self):
+        while True:
+            if self._incoming["heartbeat"]:
+                agg = self._aggregate()
+                primary = self.primary.compute(agg)
+                shadows = [s.compute(agg) for s in self.shadows]
+
+                self.emit_safe(agg, results={
+                    "primary": primary,
+                    "shadows": shadows
+                })
+
+                self.primary.adapt()
+                for s in self.shadows:
+                    s.adapt()
+
+                self._incoming.clear()
+
+            time.sleep(0.02)

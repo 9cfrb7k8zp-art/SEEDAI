@@ -1,0 +1,80 @@
+"""
+FILE: authorization_helpers.py
+PATH: seed/core/authorization_helpers.py
+
+SEED MODULE: Authorization / Permissions Engine
+COMPONENT: Permission Management Helpers
+
+VERSION: 0.1.0
+STATUS: Alpha
+PLATFORM: Cross-platform (Windows / macOS / Linux)
+
+RESPONSIBILITY:
+- Create, store, revoke hierarchical permission records
+- Assign numeric overlay and dot matrix color mapping
+- Full metadata, labeling, and audit trail for AI self-learning
+
+LABELS:
+- SEED_AUTH_HELPERS
+- PERMISSION_CREATION
+- HIERARCHICAL
+- DOT_MATRIX
+- LOCAL_ONLY
+"""
+
+import os
+import json
+from seed.core.permission_record import PermissionRecord
+
+class PermissionManager:
+    """
+    LABEL: PERMISSION_MANAGER_OBJECT
+    """
+
+    def __init__(self, storage_root: str):
+        self.permissions_dir = os.path.join(storage_root, "storage", "permissions")
+        os.makedirs(self.permissions_dir, exist_ok=True)
+
+    def create_permission(self, private_key_bytes: bytes, permission_code: str,
+                          scope_hierarchy: list, devices: list,
+                          consent_level: str = "blue", weight_level: int = 3,
+                          expiry_iso: str = None, parent_code: str = None):
+        """
+        Create and store a hierarchical permission record.
+        """
+        record_obj = PermissionRecord(
+            private_key_bytes=private_key_bytes,
+            permission_code=permission_code,
+            scope_hierarchy=scope_hierarchy,
+            devices=devices,
+            consent_level=consent_level,
+            expiry_iso=expiry_iso,
+            parent_code=parent_code
+        )
+
+        # Add numeric overlay to record for internal engine use
+        record = record_obj.export_record()
+        record["weight_level"] = weight_level
+        record["dot_matrix_label"] = f"{consent_level}-{weight_level}"
+
+        # Store JSON
+        file_path = os.path.join(self.permissions_dir, f"{permission_code}.json")
+        with open(file_path, "w") as f:
+            json.dump(record, f, indent=2)
+
+        return {
+            "status": "created",
+            "path": file_path,
+            "permission_code": permission_code
+        }
+
+    def revoke_permission(self, permission_code: str):
+        """
+        Revoke an existing permission record.
+        """
+        file_path = os.path.join(self.permissions_dir, f"{permission_code}.json")
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            return {"status": "revoked", "permission_code": permission_code}
+        else:
+            return {"status": "not_found", "permission_code": permission_code}

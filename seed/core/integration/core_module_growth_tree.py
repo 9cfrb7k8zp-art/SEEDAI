@@ -1,0 +1,285 @@
+# ==========================================================
+# FILE: core_module_growth_tree.py
+# PATH: SEED_ROOT/seed/core/integration/core_module_growth_tree.py
+# MODULE: Master Growth Logic v1.1
+# AUTHOR: Oracle & Carlos Clarke | Central Connect LLC
+# UPDATED: 2025-12-28
+# DESCRIPTION:
+# - TrackID-aware growth system
+# - Integrates with ReasoningLoop, AnalyticsEngine, IntentEngine
+# - Dynamic module phase expansion
+# - EventBus-driven notifications for growth actions
+# ==========================================================
+
+import os
+import json
+import logging
+from datetime import datetime
+from seed.core.tracked_data import TrackedData
+
+logger = logging.getLogger("ModuleGrowthTree")
+logger.setLevel(logging.INFO)
+
+class ModuleGrowthTree:
+    def __init__(self, 
+                 path="./logs/module_growth_tree.json",
+                 event_bus=None,
+                 analytics_engine=None,
+                 intent_engine=None,
+                 reasoning_loop=None):
+        self.path = path
+        self.event_bus = event_bus
+        self.analytics_engine = analytics_engine
+        self.intent_engine = intent_engine
+        self.reasoning_loop = reasoning_loop
+
+        self.tree = {
+            "Energy Autonomy": {
+                "description": "Complete off-grid power knowledge and simulation.",
+                "phases": [
+                    "Phase 1: PulseCell Energy Loop (complete)",
+                    "Phase 2: Crystal Resonance Expansion",
+                    "Phase 3: Field Sync with Environmental Energy",
+                    "Phase 4: Modular Power Units (buildable designs)",
+                    "Phase 5: Autonomous Energy Diagnostics",
+                ],
+            },
+            "Intelligent Growth": {
+                "description": "Learning system expands understanding of logistics, CAD, production lines.",
+                "phases": [
+                    "Phase 1: JSON Parsing Intelligence (complete)",
+                    "Phase 2: Flight & Map Learning Modules (complete)",
+                    "Phase 3: Engineering Process Comprehension",
+                    "Phase 4: Resource Allocation & Tool Path Simulation",
+                    "Phase 5: AI Design Co-Pilot with Blueprint Drafting",
+                ],
+            },
+            "Geo-Truth Mapping": {
+                "description": "Decentralized flat plane navigation system based on real data.",
+                "phases": [
+                    "Phase 1: Polar-Centered Grid (complete)",
+                    "Phase 2: Landmark & Zone Logic (complete)",
+                    "Phase 3: Flight Path Validation",
+                    "Phase 4: Live Local Tracking with IOT",
+                    "Phase 5: Full Geo-Truth Offline Navigation",
+                ],
+            },
+            "Survival Systems": {
+                "description": "Base modules for off-grid survival, resource mapping, self-sufficiency.",
+                "phases": [
+                    "Phase 1: Energy & Navigation Backbone (complete)",
+                    "Phase 2: Off-Grid Communication Hook",
+                    "Phase 3: Fabrication Blueprint Learning",
+                    "Phase 4: Field Repair AI",
+                    "Phase 5: Autonomous Fabrication Protocols",
+                ],
+            },
+            "System Intelligence Layers": {
+                "description": "Core AI expansion in awareness, self-debugging, strategy planning.",
+                "phases": [
+                    "Phase 1: Logging and Self-Diagnostics (complete)",
+                    "Phase 2: Dependency Awareness",
+                    "Phase 3: Decision Logic Tree Growth",
+                    "Phase 4: Anomaly Detection Loops",
+                    "Phase 5: Autonomous Multi-Field Mastery (Energy + Navigation + Engineering)",
+                ],
+            },
+            "last_updated": str(datetime.now())
+        }
+
+        self.save_tree()
+        logging.basicConfig(level=logging.INFO)
+
+    # ==================================================
+    # Save / Load
+    # ==================================================
+    def save_tree(self):
+        os.makedirs(os.path.dirname(self.path), exist_ok=True)
+        with open(self.path, "w") as f:
+            json.dump(self.tree, f, indent=4)
+
+    def load_tree(self):
+        if os.path.exists(self.path):
+            with open(self.path, "r") as f:
+                self.tree = json.load(f)
+        return self.tree
+
+    # ==================================================
+    # Add phase dynamically (TrackID-aware)
+    # ==================================================
+    def add_phase(self, category, phase_description):
+        if category in self.tree:
+            self.tree[category]["phases"].append(phase_description)
+            self.tree["last_updated"] = str(datetime.now())
+            self.save_tree()
+            logger.info(f"Added new phase to {category}: {phase_description}")
+
+            # Generate a TrackID for the growth action
+            track_id = TrackedData._generate_track_id("growth", category)
+
+            # Notify EventBus
+            if self.event_bus:
+                self.event_bus.publish(
+                    "MODULE_GROWTH_UPDATE",
+                    payload={
+                        "category": category,
+                        "new_phase": phase_description,
+                        "timestamp": str(datetime.now()),
+                        "track_id": track_id
+                    },
+                    source="ModuleGrowthTree",
+                    track_id=track_id
+                )
+
+            # Push into Analytics Engine
+            if self.analytics_engine:
+                self.analytics_engine.ingest({
+                    "track_id": track_id,
+                    "source": "ModuleGrowthTree",
+                    "result": {
+                        "category": category,
+                        "phase_added": phase_description
+                    },
+                    "timestamp": datetime.now().isoformat()
+                })
+
+            # Optionally, feed into Reasoning Loop for dynamic action planning
+            if self.reasoning_loop:
+                reasoning_payload = {
+                    "payload": {"category": category, "phase": phase_description},
+                    "thought_pressure": 0.5,
+                    "cycle_id": track_id
+                }
+                self.reasoning_loop.run_cycle(reasoning_payload)
+
+            # Optionally, log intent suggestion based on growth
+            if self.intent_engine:
+                self.intent_engine.score_intents(
+                    inputs={"category_phase": len(self.tree[category]["phases"])},
+                    source="growth_module"
+                )
+
+        else:
+            logger.error(f"Category '{category}' does not exist in growth tree.")
+
+    # ==================================================
+    # Record intent observations for governed growth review
+    # ==================================================
+    def record_intent(self, intent_result, *, source="IntentEngine", qbit=None):
+        if not isinstance(intent_result, dict):
+            return False
+
+        review = self.tree.setdefault(
+            "Intent Growth",
+            {
+                "description": "Intent observations feeding bounded adaptive growth review.",
+                "items": [],
+            },
+        )
+
+        items = review.setdefault("items", [])
+        item = {
+            "timestamp": intent_result.get("timestamp", datetime.now().isoformat()),
+            "source": source,
+            "intent": intent_result.get("intent") or intent_result.get("dominant"),
+            "confidence": intent_result.get("confidence"),
+            "urgency": intent_result.get("urgency"),
+            "novelty": intent_result.get("novelty"),
+            "stability": intent_result.get("stability"),
+            "ambiguity": intent_result.get("ambiguity"),
+            "sequence": intent_result.get("sequence"),
+            "track_id": getattr(qbit, "track_id", None) if qbit is not None else None,
+        }
+
+        if isinstance(qbit, dict):
+            item["track_id"] = qbit.get("track_id") or qbit.get("metadata", {}).get("track_id")
+
+        if items and items[-1] == item:
+            return False
+
+        items.append(item)
+        if len(items) > 100:
+            del items[:-100]
+
+        self.tree["last_updated"] = str(datetime.now())
+        self._intent_record_count = getattr(
+            self,
+            "_intent_record_count",
+            0,
+        ) + 1
+
+        if self._intent_record_count % 10 == 0:
+            self.save_tree()
+
+        return True
+
+    # ==================================================
+    # Get current tree
+    # ==================================================
+    def get_tree(self):
+        return self.tree
+
+    # ==================================================
+    # Record idle observations for governed growth review
+    # ==================================================
+    def record_idle(self, idle_context):
+        if not isinstance(idle_context, dict):
+            return False
+
+        review = self.tree.setdefault(
+            "Idle Review",
+            {
+                "description": "Bounded idle observations awaiting governed growth review.",
+                "items": [],
+            },
+        )
+
+        items = review.setdefault("items", [])
+        item = {
+            "timestamp": idle_context.get("timestamp"),
+            "source": idle_context.get("source", "QBIT_DIALER_IDLE"),
+            "track_id": idle_context.get("oracle_track_id"),
+            "channel": idle_context.get("channel"),
+            "governor": idle_context.get("governor"),
+            "oracle": idle_context.get("oracle"),
+        }
+
+        if items and items[-1] == item:
+            return False
+
+        items.append(item)
+        if len(items) > 100:
+            del items[:-100]
+
+        self.tree["last_updated"] = str(datetime.now())
+        self._idle_record_count = getattr(
+            self,
+            "_idle_record_count",
+            0,
+        ) + 1
+
+        if self._idle_record_count % 10 == 0:
+            self.save_tree()
+
+        return True
+
+
+# ==================================================
+# Example usage
+# ==================================================
+if __name__ == "__main__":
+    growth_tree = ModuleGrowthTree()
+    tree = growth_tree.get_tree()
+    print("Current Module Growth Tree:")
+    for category, data in tree.items():
+        if isinstance(data, dict):
+            print(f"\n{category}: {data['description']}")
+            for phase in data["phases"]:
+                print(f" - {phase}")
+
+
+# ==================================================
+# Run placeholder
+# ==================================================
+def run():
+    print("🛠️ Auto-generated run() for module: core_module_growth_tree.py")

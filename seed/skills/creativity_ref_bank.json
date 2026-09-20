@@ -1,0 +1,790 @@
+{
+  "core_insights": [
+    {
+      "type": "ethics",
+      "source": "C:\\AFM\\modules\\darq_cre.py",
+      "timestamp": "2025-06-12T00:23:22.313553",
+      "note": "KEYWORDS = [\"# ethics\", \"# inspiration\", \"# blueprint\", \"# directive\", \"# core\"]",
+      "linked_modules": []
+    },
+    {
+      "type": "inspiration",
+      "source": "C:\\AFM\\modules\\darq_cre.py",
+      "timestamp": "2025-06-12T00:23:22.313678",
+      "note": "KEYWORDS = [\"# ethics\", \"# inspiration\", \"# blueprint\", \"# directive\", \"# core\"]",
+      "linked_modules": []
+    },
+    {
+      "type": "blueprint",
+      "source": "C:\\AFM\\modules\\darq_cre.py",
+      "timestamp": "2025-06-12T00:23:22.313876",
+      "note": "KEYWORDS = [\"# ethics\", \"# inspiration\", \"# blueprint\", \"# directive\", \"# core\"]",
+      "linked_modules": []
+    },
+    {
+      "type": "directive",
+      "source": "C:\\AFM\\modules\\darq_cre.py",
+      "timestamp": "2025-06-12T00:23:22.313962",
+      "note": "KEYWORDS = [\"# ethics\", \"# inspiration\", \"# blueprint\", \"# directive\", \"# core\"]",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\darq_cre.py",
+      "timestamp": "2025-06-12T00:23:22.314048",
+      "note": "KEYWORDS = [\"# ethics\", \"# inspiration\", \"# blueprint\", \"# directive\", \"# core\"]",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\nexus_core.py",
+      "timestamp": "2025-06-12T00:23:24.077018",
+      "note": "# Core Modules Simulated",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\archived_modules\\updated_core_manager_1749348091_1749351698_1749355284_1749385758_1749388022_1749388640_1749473597.py",
+      "timestamp": "2025-06-12T00:24:28.156542",
+      "note": "# core_manager.py",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\archived_modules\\updated_handler_1749348092_1749351700_1749355289_1749385767_1749388023_1749388641_1749471902.py",
+      "timestamp": "2025-06-12T00:24:47.459462",
+      "note": "# CORE FEATURES",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\archived_modules\\updated_handler_1749348092_1749351700_1749355289_1749385767_1749388023_1749388641_1749471902.py",
+      "timestamp": "2025-06-12T00:24:47.459606",
+      "note": "# CORE PROPERTIES",
+      "linked_modules": []
+    },
+    {
+      "type": "directive",
+      "source": "C:\\AFM\\modules\\archived_modules\\updated_updated_updated_updated_updated_updated_updated__strptime_1749348105_1749351710_1749355298_1749385778_1749388037_1749388648_1749420113.py",
+      "timestamp": "2025-06-12T00:28:17.912539",
+      "note": "# Directives not explicitly handled below:",
+      "linked_modules": []
+    },
+    {
+      "type": "directive",
+      "source": "C:\\AFM\\modules\\archived_modules\\updated_updated_updated_updated_updated_updated__strptime_1749348105_1749351710_1749355298_1749385778_1749388037_1749388648.py",
+      "timestamp": "2025-06-12T00:28:26.421503",
+      "note": "# Directives not explicitly handled below:",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_bindings_1749348091_1749351697_1749355283_1749385757_1749388022_1749388640_1749472755.py",
+      "timestamp": "2025-06-12T00:37:55.065729",
+      "note": "# CoreFoundation time!",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_bindings_1749348091_1749351697_1749355283_1749385757_1749388022_1749388640_1749473952.py",
+      "timestamp": "2025-06-12T00:37:55.114136",
+      "note": "# CoreFoundation time!",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_core_manager_1749348091_1749351698_1749355284_1749385758_1749388022_1749388640_1749471900.py",
+      "timestamp": "2025-06-12T00:38:39.839271",
+      "note": "# core_manager.py",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_handler_1749348092_1749351700_1749355289_1749385767_1749388023_1749388641_1749473873.py",
+      "timestamp": "2025-06-12T00:40:57.785732",
+      "note": "# CORE FEATURES",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_handler_1749348092_1749351700_1749355289_1749385767_1749388023_1749388641_1749473873.py",
+      "timestamp": "2025-06-12T00:40:57.785861",
+      "note": "# CORE PROPERTIES",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_qos_bootstrap_1749348096_1749351703_1749355292_1749385771_1749388032_1749388643_1749470581.py",
+      "timestamp": "2025-06-12T00:43:50.382472",
+      "note": "# CORE/qos_bootstrap.py",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_qos_bootstrap_1749348096_1749351703_1749355292_1749385771_1749388032_1749388643_1749472358.py",
+      "timestamp": "2025-06-12T00:43:50.493946",
+      "note": "# CORE/qos_bootstrap.py",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_qos_bootstrap_1749348096_1749351703_1749355292_1749385771_1749388032_1749388643_1749473956.py",
+      "timestamp": "2025-06-12T00:43:50.548603",
+      "note": "# CORE/qos_bootstrap.py",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_updated_updated_updated_updated_updated_updated_utils_1749348101_1749351709_1749355297_1749385775_1749388035_1749388646_1749420109.py",
+      "timestamp": "2025-06-12T00:46:19.845406",
+      "note": "# Core metadata spec for `Name`",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_utils_1749348101_1749351709_1749355297_1749385775_1749388035_1749388646_1749471478.py",
+      "timestamp": "2025-06-12T00:47:25.158645",
+      "note": "# Core metadata spec for `Name`",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated_utils_1749348101_1749351709_1749355297_1749385775_1749388035_1749388646_1749473187.py",
+      "timestamp": "2025-06-12T00:47:25.188637",
+      "note": "# Core metadata spec for `Name`",
+      "linked_modules": []
+    },
+    {
+      "type": "directive",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated__strptime_1749348105_1749351710_1749355298_1749385778_1749388037_1749388648_1749471047.py",
+      "timestamp": "2025-06-12T00:51:44.273903",
+      "note": "# Directives not explicitly handled below:",
+      "linked_modules": []
+    },
+    {
+      "type": "directive",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated__strptime_1749348105_1749351710_1749355298_1749385778_1749388037_1749388648_1749472765.py",
+      "timestamp": "2025-06-12T00:51:44.581180",
+      "note": "# Directives not explicitly handled below:",
+      "linked_modules": []
+    },
+    {
+      "type": "directive",
+      "source": "C:\\AFM\\modules\\redistributed\\py\\updated__strptime_1749348105_1749351710_1749355298_1749385778_1749388037_1749388648_1749473960.py",
+      "timestamp": "2025-06-12T00:51:44.817522",
+      "note": "# Directives not explicitly handled below:",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:53:02.148211",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:53:03.664706",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:53:04.328458",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:53:32.212097",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:53:32.636860",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:53:32.934715",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:54:01.252899",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:54:03.667538",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:54:04.795256",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:54:26.639471",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:54:27.072982",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:54:27.352072",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:55:02.283851",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:55:02.663068",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:55:02.905961",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:55:30.900968",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:55:31.676284",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:55:32.071094",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:56:18.089120",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:56:18.520065",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:56:18.742551",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:56:42.085544",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:56:42.659929",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:56:43.133928",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:57:01.341488",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:57:02.044359",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:57:02.203063",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:57:26.469402",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:57:26.831591",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:57:27.139941",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:57:47.671324",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:57:49.756982",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:57:50.436062",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:58:11.325989",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:58:11.808917",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:58:12.148171",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:58:48.283511",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:58:48.918914",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:58:49.199224",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T00:59:06.617437",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T00:59:07.095074",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T00:59:07.224024",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:00:11.725748",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:00:12.456940",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:00:12.780019",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:00:28.890176",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:00:29.547451",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:00:30.019493",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:00:56.807475",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:00:57.458027",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:00:57.687529",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:01:35.545343",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:01:37.498028",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:01:39.236493",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:02:34.683292",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:02:36.970994",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:02:37.674604",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:03:13.154993",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:03:13.744986",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:03:14.394435",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:04:09.268388",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:04:10.161109",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:04:10.582305",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:04:45.620214",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:04:49.097728",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:04:49.698181",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:05:29.402737",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:05:31.043015",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:05:31.481552",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:06:42.486369",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:06:44.429124",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:06:45.185970",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:07:15.466844",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:07:17.319850",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:07:18.066388",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:09:13.255277",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:09:17.748578",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:09:20.353072",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:10:01.810814",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:10:02.641352",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:10:02.886295",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:10:36.120038",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:10:37.034631",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:10:38.459692",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\DNSzoneEditor.txt",
+      "timestamp": "2025-06-12T01:11:23.274444",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\OStxt.txt",
+      "timestamp": "2025-06-12T01:11:24.500998",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    },
+    {
+      "type": "core",
+      "source": "C:\\AFM\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\scripts\\AFM_Clone\\QOS\\logs\\QuantumOS.txt",
+      "timestamp": "2025-06-12T01:11:24.996877",
+      "note": "\u2502\u2500\u2500 system/               # Core system files",
+      "linked_modules": []
+    }
+  ]
+}
+# Updated at 2025-06-15 10:38:17.552074
+# Updated at 2025-06-15 20:39:43.834433
